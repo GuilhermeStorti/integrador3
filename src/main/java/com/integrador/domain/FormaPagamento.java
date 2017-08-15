@@ -1,0 +1,57 @@
+package com.integrador.domain;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * Created by guilhermeplasma on 15/08/17.
+ */
+@Entity
+@Table(name = "forma_pagamento", schema = "public", catalog = "integrador3")
+public class FormaPagamento {
+    private int id;
+    private String descricao;
+
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "descricao")
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FormaPagamento that = (FormaPagamento) o;
+
+        if (id != that.id) return false;
+        if (descricao != null ? !descricao.equals(that.descricao) : that.descricao != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
+        return result;
+    }
+}
