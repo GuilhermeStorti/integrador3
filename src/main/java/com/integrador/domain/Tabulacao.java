@@ -3,7 +3,10 @@ package com.integrador.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  * Created by guilhermeplasma on 15/08/17.
@@ -14,6 +17,8 @@ public class Tabulacao {
     private String descricao;
 
     @Id
+    @SequenceGenerator(name="pk_sequence",sequenceName="tabulacao_id_seq", allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="pk_sequence")
     @Column(name = "id")
     public int getId() {
         return id;

@@ -3,7 +3,10 @@ package com.integrador.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +19,8 @@ public class FormaPagamento {
     private String descricao;
 
     @Id
+    @SequenceGenerator(name="pk_sequence",sequenceName="forma_pagamento_id_seq", allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="pk_sequence")
     @Column(name = "id")
     public int getId() {
         return id;
