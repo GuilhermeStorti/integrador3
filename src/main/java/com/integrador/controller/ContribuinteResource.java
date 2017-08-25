@@ -1,7 +1,7 @@
-package com.integrador.resource;
+package com.integrador.controller;
 
-import com.integrador.domain.Campanha;
-import com.integrador.service.CampanhaService;
+import com.integrador.domain.Contribuinte;
+import com.integrador.service.ContribuinteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,38 +22,38 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/campanha")
-public class CampanhaResource {
+@RequestMapping("/contribuinte")
+public class ContribuinteResource {
 
     @Autowired
-    private CampanhaService service;
+    private ContribuinteService service;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Campanha>> listAll() {
+    public ResponseEntity<List<Contribuinte>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Campanha> findById(@PathVariable("id") Integer id) {
-        Campanha campanha = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(campanha);
+    ResponseEntity<Contribuinte> findById(@PathVariable("id") Integer id) {
+        Contribuinte contribuinte = this.service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(contribuinte);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Campanha campanha) {
-        this.service.save(campanha);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(campanha.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody Contribuinte contribuinte) {
+        this.service.save(contribuinte);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(contribuinte.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Campanha campanha, @PathVariable("id") Integer id) {
-        this.service.update(campanha);
+    public ResponseEntity<Void> update(@RequestBody Contribuinte contribuinte, @PathVariable("id") Integer id) {
+        this.service.update(contribuinte);
         return ResponseEntity.noContent().build();
     }
 

@@ -37,7 +37,7 @@ public class ResourceExceptionHandler {
     private static final String errorNove = "http://erros.teste.com/409";
     private static final String errorQuatro = "http://erros.teste.com/404";
 
-/*    @ExceptionHandler(CampanhaNotFoundException.class)
+    @ExceptionHandler(CampanhaNotFoundException.class)
     public ResponseEntity<ErrorDetails> handlerCampanhaNotFoundException(CampanhaNotFoundException e, HttpServletRequest request) {
         e.printStackTrace();
         ErrorDetails error = new ErrorDetails();
@@ -224,7 +224,7 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler(TabulacaoAlreadyExistException.class)
+    @ExceptionHandler(UsuarioAlreadyExistException.class)
     public ResponseEntity<ErrorDetails> handlerUsuarioAlreadyExistException(UsuarioAlreadyExistException e, HttpServletRequest request) {
         e.printStackTrace();
         ErrorDetails error = new ErrorDetails();
@@ -233,6 +233,6 @@ public class ResourceExceptionHandler {
         error.setUrl(errorNove);
         error.setTimestamp(System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }*/
+    }
 
 }
