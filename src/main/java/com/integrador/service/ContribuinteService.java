@@ -25,7 +25,7 @@ public class ContribuinteService {
     }
 
     @Transactional(readOnly = true)
-    public Contribuinte findById(Integer id){
+    public Contribuinte findById( Integer id){
         if(!exist(id)){
             throw new ContribuinteNotFoundException("Contribuinte com este id não existe " + id);
         }

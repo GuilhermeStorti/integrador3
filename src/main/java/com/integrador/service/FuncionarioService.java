@@ -25,7 +25,7 @@ public class FuncionarioService {
     }
 
     @Transactional(readOnly = true)
-    public Funcionario findById(Integer id){
+    public Funcionario findById( Integer id){
         if(!exist(id)){
             throw new FuncionarioNotFoundException("Funcionario com este id não existe " + id);
         }

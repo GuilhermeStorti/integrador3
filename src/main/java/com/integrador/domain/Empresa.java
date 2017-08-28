@@ -3,26 +3,23 @@ package com.integrador.domain;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "funcionario")
-public class Funcionario {
+@Table (name = "empresa")
+public class Empresa {
 
     @Id
-    @SequenceGenerator(name="pk_sequence",sequenceName="funcionario_id_seq", allocationSize=1)
+    @SequenceGenerator(name="pk_sequence",sequenceName="empresa_id_seq", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="pk_sequence")
     @Column (name = "id")
     private int id;
 
-    @Column (name = "nome")
-    private String nome;
+    @Column (name = "nome_fantasia")
+    private String nomeFantasia;
 
-    @Column (name = "sobrenome")
-    private String sobrenome;
+    @Column (name = "razao_social")
+    private String razaoSocial;
 
-    @Column (name = "sexo")
-    private String sexo;
-
-    @Column (name = "cpf")
-    private String cpf;
+    @Column (name = "cnpj")
+    private String cnpj;
 
     @Column (name = "email")
     private String email;
@@ -42,56 +39,39 @@ public class Funcionario {
     @Column (name = "situacao")
     private String situacao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cargo", referencedColumnName = "id", nullable = false)
-    private Cargo cargoByIdCargo;
-
-    @ManyToOne
-    @JoinColumn(name = "cep", referencedColumnName = "cep", nullable = false)
-    private Endereco enderecoByCep;
-
     public int getId() {
         return id;
     }
 
-    public Funcionario setId( int id ) {
+    public Empresa setId( int id ) {
         this.id = id;
         return this;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
 
-    public Funcionario setNome( String nome ) {
-        this.nome = nome;
+    public Empresa setNomeFantasia( String nomeFantasia ) {
+        this.nomeFantasia = nomeFantasia;
         return this;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public Funcionario setSobrenome( String sobrenome ) {
-        this.sobrenome = sobrenome;
+    public Empresa setRazaoSocial( String razaoSocial ) {
+        this.razaoSocial = razaoSocial;
         return this;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public Funcionario setSexo( String sexo ) {
-        this.sexo = sexo;
-        return this;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public Funcionario setCpf( String cpf ) {
-        this.cpf = cpf;
+    public Empresa setCnpj( String cnpj ) {
+        this.cnpj = cnpj;
         return this;
     }
 
@@ -99,16 +79,16 @@ public class Funcionario {
         return email;
     }
 
-    public Funcionario setEmail( String email ) {
+    public Empresa setEmail( String email ) {
         this.email = email;
         return this;
     }
-    
+
     public String getTelefone1() {
         return telefone1;
     }
 
-    public Funcionario setTelefone1( String telefone1 ) {
+    public Empresa setTelefone1( String telefone1 ) {
         this.telefone1 = telefone1;
         return this;
     }
@@ -117,7 +97,7 @@ public class Funcionario {
         return telefone2;
     }
 
-    public Funcionario setTelefone2( String telefone2 ) {
+    public Empresa setTelefone2( String telefone2 ) {
         this.telefone2 = telefone2;
         return this;
     }
@@ -126,7 +106,7 @@ public class Funcionario {
         return numeroResidencia;
     }
 
-    public Funcionario setNumeroResidencia( Integer numeroResidencia ) {
+    public Empresa setNumeroResidencia( Integer numeroResidencia ) {
         this.numeroResidencia = numeroResidencia;
         return this;
     }
@@ -135,7 +115,7 @@ public class Funcionario {
         return complementoResidencia;
     }
 
-    public Funcionario setComplementoResidencia( String complementoResidencia ) {
+    public Empresa setComplementoResidencia( String complementoResidencia ) {
         this.complementoResidencia = complementoResidencia;
         return this;
     }
@@ -144,26 +124,8 @@ public class Funcionario {
         return situacao;
     }
 
-    public Funcionario setSituacao( String situacao ) {
+    public Empresa setSituacao( String situacao ) {
         this.situacao = situacao;
-        return this;
-    }
-    
-    public Cargo getCargoByIdCargo() {
-        return cargoByIdCargo;
-    }
-
-    public Funcionario setCargoByIdCargo(Cargo cargoByIdCargo) {
-        this.cargoByIdCargo = cargoByIdCargo;
-        return this;
-    }
-    
-    public Endereco getEnderecoByCep() {
-        return enderecoByCep;
-    }
-
-    public Funcionario setEnderecoByCep(Endereco enderecoByCep) {
-        this.enderecoByCep = enderecoByCep;
         return this;
     }
 
@@ -172,13 +134,13 @@ public class Funcionario {
         if ( this == o ) return true;
         if ( o == null || getClass () != o.getClass () ) return false;
 
-        Funcionario that = (Funcionario) o;
+        Empresa that = (Empresa) o;
 
         if ( id != that.id ) return false;
-        if ( nome != null ? !nome.equals ( that.nome ) : that.nome != null ) return false;
-        if ( sobrenome != null ? !sobrenome.equals ( that.sobrenome ) : that.sobrenome != null ) return false;
-        if ( sexo != null ? !sexo.equals ( that.sexo ) : that.sexo != null ) return false;
-        if ( cpf != null ? !cpf.equals ( that.cpf ) : that.cpf != null ) return false;
+        if ( nomeFantasia != null ? !nomeFantasia.equals ( that.nomeFantasia ) : that.nomeFantasia != null )
+            return false;
+        if ( razaoSocial != null ? !razaoSocial.equals ( that.razaoSocial ) : that.razaoSocial != null ) return false;
+        if ( cnpj != null ? !cnpj.equals ( that.cnpj ) : that.cnpj != null ) return false;
         if ( email != null ? !email.equals ( that.email ) : that.email != null ) return false;
         if ( telefone1 != null ? !telefone1.equals ( that.telefone1 ) : that.telefone1 != null ) return false;
         if ( telefone2 != null ? !telefone2.equals ( that.telefone2 ) : that.telefone2 != null ) return false;
@@ -194,10 +156,9 @@ public class Funcionario {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (nome != null ? nome.hashCode () : 0);
-        result = 31 * result + (sobrenome != null ? sobrenome.hashCode () : 0);
-        result = 31 * result + (sexo != null ? sexo.hashCode () : 0);
-        result = 31 * result + (cpf != null ? cpf.hashCode () : 0);
+        result = 31 * result + (nomeFantasia != null ? nomeFantasia.hashCode () : 0);
+        result = 31 * result + (razaoSocial != null ? razaoSocial.hashCode () : 0);
+        result = 31 * result + (cnpj != null ? cnpj.hashCode () : 0);
         result = 31 * result + (email != null ? email.hashCode () : 0);
         result = 31 * result + (telefone1 != null ? telefone1.hashCode () : 0);
         result = 31 * result + (telefone2 != null ? telefone2.hashCode () : 0);

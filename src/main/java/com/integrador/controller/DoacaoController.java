@@ -1,7 +1,7 @@
 package com.integrador.controller;
 
-import com.integrador.domain.Tabulacao;
-import com.integrador.service.TabulacaoService;
+import com.integrador.domain.Doacao;
+import com.integrador.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,45 +22,45 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/tabulacao")
-public class TabulacaoResource {
+@RequestMapping("/recibo")
+public class DoacaoController {
 
     @Autowired
-    private TabulacaoService service;
+    private DoacaoService service;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Tabulacao>> listAll() {
+    public ResponseEntity<List<Doacao>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{numeroRecibo }", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Tabulacao> findById(@PathVariable("id") Integer id) {
-        Tabulacao tabulacao = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(tabulacao);
+    ResponseEntity<Doacao> findById( @PathVariable("numeroRecibo ") Integer numeroRecibo ) {
+        Doacao doacao = this.service.findById(numeroRecibo );
+        return ResponseEntity.status(HttpStatus.OK).body(doacao);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Tabulacao tabulacao) {
-        this.service.save(tabulacao);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tabulacao.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody Doacao doacao) {
+        this.service.save(doacao);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{numeroRecibo }").buildAndExpand(doacao.getNumeroRecibo()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Tabulacao tabulacao, @PathVariable("id") Integer id) {
-        this.service.update(tabulacao);
+    @RequestMapping(value = "/{numeroRecibo }", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Doacao doacao, @PathVariable("numeroRecibo ") Integer numeroRecibo ) {
+        this.service.update(doacao);
         return ResponseEntity.noContent().build();
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-        this.service.delete(id);
+    @RequestMapping(value = "/{numeroRecibo }", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable("numeroRecibo ") Integer numeroRecibo ) {
+        this.service.delete(numeroRecibo );
         return ResponseEntity.ok().build();
     }
 }

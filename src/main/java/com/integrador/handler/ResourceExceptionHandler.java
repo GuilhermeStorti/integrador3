@@ -13,10 +13,8 @@ import com.integrador.exception.FormaPagamentoAlreadyExistException;
 import com.integrador.exception.FormaPagamentoNotFoundException;
 import com.integrador.exception.FuncionarioAlreadyExistException;
 import com.integrador.exception.FuncionarioNotFoundException;
-import com.integrador.exception.ReciboAlreadyExistException;
-import com.integrador.exception.ReciboNotFoundException;
-import com.integrador.exception.TabulacaoAlreadyExistException;
-import com.integrador.exception.TabulacaoNotFoundException;
+import com.integrador.exception.DoacaoAlreadyExistException;
+import com.integrador.exception.DoacaoNotFoundException;
 import com.integrador.exception.UsuarioAlreadyExistException;
 import com.integrador.exception.UsuarioNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -169,8 +167,8 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
-    @ExceptionHandler(ReciboNotFoundException.class)
-    public ResponseEntity<ErrorDetails> handlerReciboNotFoundException(ReciboNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(DoacaoNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handlerReciboNotFoundException( DoacaoNotFoundException e, HttpServletRequest request) {
         e.printStackTrace();
         ErrorDetails error = new ErrorDetails();
         error.setStatus(404L);
@@ -180,34 +178,12 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler(ReciboAlreadyExistException.class)
-    public ResponseEntity<ErrorDetails> handlerReciboAlreadyExistException(ReciboAlreadyExistException e, HttpServletRequest request) {
+    @ExceptionHandler(DoacaoAlreadyExistException.class)
+    public ResponseEntity<ErrorDetails> handlerReciboAlreadyExistException( DoacaoAlreadyExistException e, HttpServletRequest request) {
         e.printStackTrace();
         ErrorDetails error = new ErrorDetails();
         error.setStatus(409L);
         error.setTitle("Recibo already exist.");
-        error.setUrl(errorNove);
-        error.setTimestamp(System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
-
-    @ExceptionHandler(TabulacaoNotFoundException.class)
-    public ResponseEntity<ErrorDetails> handlerTabulacaoNotFoundException(TabulacaoNotFoundException e, HttpServletRequest request) {
-        e.printStackTrace();
-        ErrorDetails error = new ErrorDetails();
-        error.setStatus(404L);
-        error.setTitle("Tabulacao not found.");
-        error.setUrl(errorQuatro);
-        error.setTimestamp(System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
-
-    @ExceptionHandler(TabulacaoAlreadyExistException.class)
-    public ResponseEntity<ErrorDetails> handlerTabulacaoAlreadyExistException(TabulacaoAlreadyExistException e, HttpServletRequest request) {
-        e.printStackTrace();
-        ErrorDetails error = new ErrorDetails();
-        error.setStatus(409L);
-        error.setTitle("Tabulacao already exist.");
         error.setUrl(errorNove);
         error.setTimestamp(System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
