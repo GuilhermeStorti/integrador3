@@ -1,6 +1,7 @@
 package com.integrador.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "endereco")
@@ -21,6 +22,9 @@ public class Endereco {
 
     @Column (name = "uf")
     private String uf;
+
+    @OneToMany(mappedBy = "cep", targetEntity = Contribuinte.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Contribuinte> contribuintes;
 
     public int getCep() {
         return cep;
@@ -64,6 +68,15 @@ public class Endereco {
 
     public Endereco setUf( String uf ) {
         this.uf = uf;
+        return this;
+    }
+
+    public List <Contribuinte> getContribuintes() {
+        return contribuintes;
+    }
+
+    public Endereco setContribuintes( List <Contribuinte> contribuintes ) {
+        this.contribuintes = contribuintes;
         return this;
     }
 

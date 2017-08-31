@@ -10,6 +10,8 @@ import java.sql.Date;
 public class Doacao {
 
     @Id
+    @SequenceGenerator(name="pk_sequence",sequenceName="doacao_numero_recibo_seq", allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="pk_sequence")
     @Column (name = "numero_recibo")
     private int numeroRecibo;
 
@@ -33,15 +35,15 @@ public class Doacao {
 
     @ManyToOne
     @JoinColumn(name = "id_contribuinte", referencedColumnName = "id", nullable = false)
-    private Contribuinte contribuinteByIdContribuinte;
+    private Contribuinte contribuinte;
 
     @ManyToOne
     @JoinColumn(name = "id_campanha", referencedColumnName = "id", nullable = false)
-    private Campanha campanhaByIdCampanha;
+    private Campanha campanha;
 
     @ManyToOne
     @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id", nullable = false)
-    private FormaPagamento formaPagamentoByIdFormaPagamento;
+    private FormaPagamento formaPagamento;
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario_motoboy", referencedColumnName = "id", nullable = false)
@@ -115,30 +117,30 @@ public class Doacao {
         return this;
     }
 
-    public Contribuinte getContribuinteByIdContribuinte() {
-        return contribuinteByIdContribuinte;
+    public Contribuinte getContribuinte() {
+        return contribuinte;
     }
 
-    public Doacao setContribuinteByIdContribuinte(Contribuinte contribuinteByIdContribuinte) {
-        this.contribuinteByIdContribuinte = contribuinteByIdContribuinte;
+    public Doacao setContribuinte( Contribuinte contribuinte) {
+        this.contribuinte = contribuinte;
         return this;
     }
 
-    public Campanha getCampanhaByIdCampanha() {
-        return campanhaByIdCampanha;
+    public Campanha getCampanha() {
+        return campanha;
     }
 
-    public Doacao setCampanhaByIdCampanha(Campanha campanhaByIdCampanha) {
-        this.campanhaByIdCampanha = campanhaByIdCampanha;
+    public Doacao setCampanha( Campanha campanha) {
+        this.campanha = campanha;
         return this;
     }
 
-    public FormaPagamento getFormaPagamentoByIdFormaPagamento() {
-        return formaPagamentoByIdFormaPagamento;
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
     }
 
-    public Doacao setFormaPagamentoByIdFormaPagamento(FormaPagamento formaPagamentoByIdFormaPagamento) {
-        this.formaPagamentoByIdFormaPagamento = formaPagamentoByIdFormaPagamento;
+    public Doacao setFormaPagamento( FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
         return this;
     }
 

@@ -39,6 +39,10 @@ public class Empresa {
     @Column (name = "situacao")
     private String situacao;
 
+    @ManyToOne
+    @JoinColumn(name = "cep", referencedColumnName = "cep", nullable = false)
+    private Endereco cep;
+
     public int getId() {
         return id;
     }

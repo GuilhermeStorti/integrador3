@@ -1,6 +1,7 @@
 package com.integrador.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "funcionario")
@@ -44,11 +45,19 @@ public class Funcionario {
 
     @ManyToOne
     @JoinColumn(name = "id_cargo", referencedColumnName = "id", nullable = false)
-    private Cargo cargoByIdCargo;
+    private Cargo cargo;
 
     @ManyToOne
     @JoinColumn(name = "cep", referencedColumnName = "cep", nullable = false)
-    private Endereco enderecoByCep;
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "funcionario", targetEntity = Contribuinte.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Contribuinte> contribuintes;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name="id_usuario"))
+    private Usuario usuario;
+
 
     public int getId() {
         return id;
@@ -149,21 +158,39 @@ public class Funcionario {
         return this;
     }
     
-    public Cargo getCargoByIdCargo() {
-        return cargoByIdCargo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public Funcionario setCargoByIdCargo(Cargo cargoByIdCargo) {
-        this.cargoByIdCargo = cargoByIdCargo;
+    public Funcionario setCargo( Cargo cargoByIdCargo) {
+        this.cargo = cargoByIdCargo;
         return this;
     }
     
-    public Endereco getEnderecoByCep() {
-        return enderecoByCep;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public Funcionario setEnderecoByCep(Endereco enderecoByCep) {
-        this.enderecoByCep = enderecoByCep;
+    public Funcionario setEndereco( Endereco enderecoByCep) {
+        this.endereco = enderecoByCep;
+        return this;
+    }
+
+    public List <Contribuinte> getContribuintes() {
+        return contribuintes;
+    }
+
+    public Funcionario setContribuintes( List <Contribuinte> contribuintes ) {
+        this.contribuintes = contribuintes;
+        return this;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Funcionario setUsuario( Usuario usuario ) {
+        this.usuario = usuario;
         return this;
     }
 

@@ -50,8 +50,13 @@ public class Contribuinte {
     private String situacao;
 
     @ManyToOne
-    @JoinColumn(name = "id_campanha", referencedColumnName = "id", nullable = false)
-    private Campanha campanha;
+    @JoinColumn(name = "cep", referencedColumnName = "cep", nullable = false)
+    private Endereco cep;
+
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario",nullable=false, foreignKey = @ForeignKey(name="id_funcionario"))
+    private Funcionario funcionario;
+
     
     public int getId() {
         return id;
@@ -170,15 +175,23 @@ public class Contribuinte {
         return this;
     }
 
-    public Campanha getCampanha() {
-        return campanha;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public Contribuinte setCampanha( Campanha campanha) {
-        this.campanha = campanha;
+    public Contribuinte setFuncionario( Funcionario funcionario ) {
+        this.funcionario = funcionario;
         return this;
     }
 
+    public Endereco getCep() {
+        return cep;
+    }
+
+    public Contribuinte setCep( Endereco cep ) {
+        this.cep = cep;
+        return this;
+    }
 
     @Override
     public boolean equals( Object o ) {
