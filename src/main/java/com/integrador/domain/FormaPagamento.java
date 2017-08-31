@@ -2,9 +2,6 @@ package com.integrador.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by mendesvieira on 27/08/17.
- */
 @Entity
 @Table (name = "forma_pagamento")
 public class FormaPagamento {

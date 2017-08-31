@@ -3,9 +3,6 @@ package com.integrador.domain;
 import javax.persistence.*;
 import java.sql.Date;
 
-/**
- * Created by mendesvieira on 27/08/17.
- */
 @Entity
 @Table (name = "contribuinte")
 public class Contribuinte {
@@ -54,7 +51,7 @@ public class Contribuinte {
 
     @ManyToOne
     @JoinColumn(name = "id_campanha", referencedColumnName = "id", nullable = false)
-    private Campanha campanhaByIdCampanha;
+    private Campanha campanha;
     
     public int getId() {
         return id;
@@ -173,12 +170,12 @@ public class Contribuinte {
         return this;
     }
 
-    public Campanha getCampanhaByIdCampanha() {
-        return campanhaByIdCampanha;
+    public Campanha getCampanha() {
+        return campanha;
     }
 
-    public Contribuinte setCampanhaByIdCampanha( Campanha campanhaByIdCampanha) {
-        this.campanhaByIdCampanha = campanhaByIdCampanha;
+    public Contribuinte setCampanha( Campanha campanha) {
+        this.campanha = campanha;
         return this;
     }
 

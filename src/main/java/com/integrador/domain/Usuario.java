@@ -2,7 +2,6 @@ package com.integrador.domain;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table (name = "usuario")
 public class Usuario {
