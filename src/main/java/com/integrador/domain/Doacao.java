@@ -1,7 +1,6 @@
 package com.integrador.domain;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.sql.Date;
 
 
@@ -16,7 +15,7 @@ public class Doacao {
     private int numeroRecibo;
 
     @Column (name = "valor")
-    private BigInteger valor;
+    private Double valor;
 
     @Column (name = "status")
     private String status;
@@ -63,11 +62,11 @@ public class Doacao {
         return this;
     }
 
-    public BigInteger getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public Doacao setValor( BigInteger valor ) {
+    public Doacao setValor( Double valor ) {
         this.valor = valor;
         return this;
     }
