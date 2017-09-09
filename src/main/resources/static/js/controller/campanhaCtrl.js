@@ -1,47 +1,38 @@
-angular.module("app").controller("campanhaCtrl", function ($scope, $http,defaultUrl) {
+angular.module("app").controller("campanhaCtrl", function ($scope, campanhaService) {
 
-    var url = defaultUrl + "/campanha";
-
-    $scope.mostrar = function()	{
-        $http.get(url).then(
-            function sucesso(response) {
-                $scope.campanhas = response.data;
-            }, function erro(response) {
-                alert("ops!! erro na chamada get campanha");
-            }
-        )
+    var mostrar = function()	{
+        campanhaService.getCampanhas().success(function (data) {
+            $scope.campanhas = data;
+        }).error(function (data, status) {
+            alert("ops!! erro na chamada get campanha");
+        });
     };
 
     $scope.salvar = function()	{
-        $http.post(url, $scope.campanha).then(
-            function sucesso(response) {
-                $scope.mostrar();
-                $scope.limpar();
-                $scope.changeToList();
-            }, function erro(response) {
-                alert("ops!! erro ao salvar campanha");
-            }
-        )
+        campanhaService.saveCampanha($scope.campanha).success(function (data) {
+            $scope.limpar();
+            mostrar();
+            $scope.changeToList();
+        });
     };
 
     $scope.editar = function(){
-        $http.put(url + "/" + $scope.campanha.id, $scope.campanha).then(
-            function sucesso(response) {
-                $scope.mostrar();
-            },function erro(response) {
-                alert("erro ao editar campanha");
-            }
-        );
+        campanhaService.updateCampanha($scope.campanha).success(function (data) {
+            $scope.limpar();
+            mostrar();
+            $scope.changeToList();
+        });
     };
 
     $scope.seleciona = function(campanha) {
-        $scope.limpar();
-        $scope.campanha = angular.copy(campanha);
+        $scope.campanha = campanha;
+        $scope.campanha.dataInicio = new Date(...campanha.dataInicio.split("-").map((item, indice) => item - indice % 2));
+        $scope.campanha.dataFim = new Date(...campanha.dataFim.split("-").map((item, indice) => item - indice % 2));
         $scope.changeToEdit();
     };
 
     $scope.limpar = function () {
-        $scope.campanha = null;
+        delete $scope.campanha;
     };
 
     $scope.changeToEdit = function () {
@@ -53,6 +44,7 @@ angular.module("app").controller("campanhaCtrl", function ($scope, $http,default
     };
 
     $scope.changeToList = function () {
+        mostrar();
         $scope.cadastro = false;
         $scope.listagem = true;
         $scope.edicao = false;
@@ -61,18 +53,15 @@ angular.module("app").controller("campanhaCtrl", function ($scope, $http,default
     };
 
     $scope.changeToSave = function () {
+        $scope.limpar();
         $scope.cadastro = true;
         $scope.listagem = false;
-        $scope.edicao = true;
+        $scope.edicao = false;
 
         $scope.titulo = "CADASTRAR";
     };
 
-    $scope.init = function () {
-        $scope.mostrar();
-        $scope.changeToList();
-    };
-
-    $scope.init();
+    mostrar();
+    $scope.changeToList();
 
 });
