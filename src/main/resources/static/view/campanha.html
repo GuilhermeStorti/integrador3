@@ -1,0 +1,128 @@
+<div class="block-header">
+    <h2>CAMPANHA</h2>
+</div>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <!--TITULO GERAL-->
+                <h2>
+                    {{titulo}}
+                </h2>
+
+                <!--BOTÕES DO CARD-->
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a data-ng-click="limpar()" ng-if="!listagem">Limpar</a></li>
+                            <li><a data-ng-click="changeToSave()" ng-if="!cadastro">Cadastrar</a></li>
+                            <li><a data-ng-click="changeToList()" ng-if="!listagem">Listar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!--CADASTRO/EDIÇÂO-->
+            <div class="body" ng-hide="!cadastro" >
+                <form name="cadastroForm">
+                    <label for="descricao">Descrição</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" id="descricao" class="form-control" ng-required="true" ng-minlength="5"
+                                   ng-model="campanha.descricao" placeholder="Entre com a descrição.">
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-sm-4">
+                            <label for="dataInicio">Data de inicio</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="date" id="dataInicio" class="datepicker form-control"
+                                           ng-model="campanha.dataInicio" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="dataFim">Data de fim</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="date" id="dataFim" class="datepicker form-control"
+                                           ng-model="campanha.dataFim" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <button data-ng-click="salvar()" type="button" ng-disabled="cadastroForm.$invalid"
+                        class="btn btn-primary m-t-15 waves-effect">SALVAR</button>
+            </div>
+            <!--TABELA DE LISTAGEM-->
+            <div class="body table-responsive" ng-hide="!listagem">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DESCRIÇÃO</th>
+                        <th>DATA INICIO</th>
+                        <th>DATA FIM</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="campanha in campanhas">
+                        <td>{{campanha.id}}</td>
+                        <td>{{campanha.descricao}}</td>
+                        <td>{{campanha.dataInicio}}</td>
+                        <td>{{campanha.dataFim | date:'dd/MM/yyyy'}}</td>
+                        <td>
+                            <i ng-click="seleciona(campanha)"class="material-icons" title="Editar">mode_edit</i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    CAMPANHAS
+                </h2>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>DESCRIÇÃO</th>
+                            <th>DATA INICIO</th>
+                            <th>DATA FIM</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="campanha in campanhas">
+                            <td ng-click="seleciona(campanha)">{{campanha.id}}</td>
+                            <td ng-click="seleciona(campanha)">{{campanha.descricao}}</td>
+                            <td ng-click="seleciona(campanha)">{{campanha.dataInicio}}</td>
+                            <td ng-click="seleciona(campanha)">{{campanha.dataFim}}</td>
+                            <td>
+                                <i class="material-icons">mode_edit</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>-->

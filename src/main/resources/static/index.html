@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="faviconBlue.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -24,6 +24,19 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
+
+    <!--Libs-->
+    <script src="js/lib/angular.js"></script>
+    <script src="js/lib/angular-route.js"></script>
+
+    <!--App-->
+    <script src="js/app.js"></script>
+
+    <!--Config-->
+    <script src="js/config/routeConfig.js"></script>
+
+    <!--Controller-->
+    <script src="js/controller/campanhaCtrl.js"></script>
 </head>
 
 <body class="theme-blue">
@@ -95,6 +108,14 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li class="active">
+                        <a href="#/campanha">
+                            <i class="material-icons">ring_volume</i>
+                            <span>Campanha</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">widgets</i>
@@ -107,7 +128,7 @@
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="#">Basic</a>
+                                        <a href="#/campanha">Campanha</a>
                                     </li>
                                     <li>
                                         <a href="#">Colored</a>
@@ -161,66 +182,8 @@
     <section class="content">
         <div class="container-fluid">
 
-            <div class="block-header">
-                <h2>CADASTRO DE CAMPANHA</h2>
-            </div>
+            <div ng-view></div>
 
-            <!-- Vertical Layout -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                CADASTRO DE CAMPANHA
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Limpar</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <label for="descricao">Descrição</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" id="descricao" class="form-control" placeholder="Entre com a descrição.">
-                                    </div>
-                                </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-sm-4">
-                                        <label for="dataInicio">Data de inicio</label>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="date" id="dataInicio" class="datepicker form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="dataFim">Data de fim</label>
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="date" id="dataFim" class="datepicker form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <button type="button" class="btn btn-primary m-t-15 waves-effect">CADASTRAR</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            </div>
         </div>
     </section>
 
@@ -237,11 +200,8 @@
     <script src="plugins/node-waves/waves.js"></script>
 
     <!-- Custom Js -->
-    <script src="js/admin.js"></script>
-    <script src="js/pages/index.js"></script>
-
-    <!-- Demo Js -->
-    <script src="js/demo.js"></script>
+    <script src="js/template/admin.js"></script>
+    <script src="js/template/index.js"></script>
 </body>
 
 </html>
