@@ -1,7 +1,7 @@
 package com.integrador.controller;
 
-import com.integrador.domain.Cargo;
-import com.integrador.service.CargoService;
+import com.integrador.domain.Campanha;
+import com.integrador.service.CampanhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,38 +22,38 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/cargo")
-public class CargoResource {
+@RequestMapping("/campanha")
+public class CampanhaController {
 
     @Autowired
-    private CargoService service;
+    private CampanhaService service;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cargo>> listAll() {
+    public ResponseEntity<List<Campanha>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Cargo> findById(@PathVariable("id") Integer id) {
-        Cargo cargo = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(cargo);
+    ResponseEntity<Campanha> findById(@PathVariable("id") Integer id) {
+        Campanha campanha = this.service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(campanha);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Cargo cargo) {
-        this.service.save(cargo);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cargo.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody Campanha campanha) {
+        this.service.save(campanha);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(campanha.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Cargo cargo, @PathVariable("id") Integer id) {
-        this.service.update(cargo);
+    public ResponseEntity<Void> update(@RequestBody Campanha campanha, @PathVariable("id") Integer id) {
+        this.service.update(campanha);
         return ResponseEntity.noContent().build();
     }
 

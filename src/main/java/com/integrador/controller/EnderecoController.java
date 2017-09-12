@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/endereco")
-public class EnderecoResource {
+public class EnderecoController {
 
     @Autowired
     private EnderecoService service;

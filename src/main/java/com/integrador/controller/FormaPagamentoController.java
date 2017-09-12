@@ -1,7 +1,7 @@
 package com.integrador.controller;
 
-import com.integrador.domain.Campanha;
-import com.integrador.service.CampanhaService;
+import com.integrador.domain.FormaPagamento;
+import com.integrador.service.FormaPagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,38 +22,38 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/campanha")
-public class CampanhaResource {
+@RequestMapping("/formaPagamento")
+public class FormaPagamentoController {
 
     @Autowired
-    private CampanhaService service;
+    private FormaPagamentoService service;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Campanha>> listAll() {
+    public ResponseEntity<List<FormaPagamento>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Campanha> findById(@PathVariable("id") Integer id) {
-        Campanha campanha = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(campanha);
+    ResponseEntity<FormaPagamento> findById(@PathVariable("id") Integer id) {
+        FormaPagamento formaPagamento = this.service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(formaPagamento);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Campanha campanha) {
-        this.service.save(campanha);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(campanha.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody FormaPagamento formaPagamento) {
+        this.service.save(formaPagamento);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(formaPagamento.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Campanha campanha, @PathVariable("id") Integer id) {
-        this.service.update(campanha);
+    public ResponseEntity<Void> update(@RequestBody FormaPagamento formaPagamento, @PathVariable("id") Integer id) {
+        this.service.update(formaPagamento);
         return ResponseEntity.noContent().build();
     }
 

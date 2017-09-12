@@ -15,6 +15,10 @@ angular.module("app").config(function ($routeProvider) {
         templateUrl: "view/usuario.html",
         controller: "usuarioCtrl"
     });
+    $routeProvider.when("/dashboard", {
+        templateUrl: "view/dashboard.html",
+        controller: "dashboardCtrl"
+    });
 
     $routeProvider.otherwise({redirectTo: "#"});
 });

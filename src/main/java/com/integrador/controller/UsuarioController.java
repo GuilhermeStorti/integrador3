@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioResource {
+public class UsuarioController {
 
     @Autowired
     private UsuarioService service;

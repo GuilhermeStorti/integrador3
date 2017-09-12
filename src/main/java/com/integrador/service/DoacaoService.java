@@ -1,5 +1,6 @@
 package com.integrador.service;
 
+import com.integrador.Utils.DateUtils;
 import com.integrador.domain.Doacao;
 import com.integrador.exception.DoacaoAlreadyExistException;
 import com.integrador.exception.DoacaoNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -62,6 +64,10 @@ public class DoacaoService {
             throw new DoacaoNotFoundException ("Doacao com este id não existe " + id);
         }
         this.repository.delete(id);
+    }
+
+    public int findDonationsOfMounth(){
+        return repository.findDonationsOfMounth(DateUtils.asDate(LocalDate.now().withDayOfMonth(1)));
     }
 
     private boolean exist( Integer id ) {

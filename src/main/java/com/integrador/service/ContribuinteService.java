@@ -1,5 +1,6 @@
 package com.integrador.service;
 
+import com.integrador.Utils.DateUtils;
 import com.integrador.domain.Contribuinte;
 import com.integrador.exception.ContribuinteAlreadyExistException;
 import com.integrador.exception.ContribuinteNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -63,6 +65,10 @@ public class ContribuinteService {
             throw new ContribuinteNotFoundException("Contribuinte com este id não existe " + id);
         }
         this.repository.delete(id);
+    }
+
+    public int findSavesOfMounth(){
+        return repository.findSavesOfMounth(DateUtils.asDate(LocalDate.now().withDayOfMonth(1)));
     }
 
     private boolean exist( Integer id ) {
