@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Usuario;
+import com.integrador.representation.UsuarioRepresentation;
 import com.integrador.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +32,13 @@ public class UsuarioController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Usuario>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<List<UsuarioRepresentation>> listAll() {
+        List<Usuario> usuarios = this.service.findAll();
+        List<UsuarioRepresentation> representations = new ArrayList<>();
+        for (Usuario u : usuarios){
+            representations.add(new UsuarioRepresentation(u));
+        }
+        return ResponseEntity.ok(representations);
     }
 
     @CrossOrigin

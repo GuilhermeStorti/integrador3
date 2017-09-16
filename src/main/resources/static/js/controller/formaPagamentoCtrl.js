@@ -59,7 +59,6 @@ angular.module("app").controller("formaPagamentoCtrl", function ($scope, formaPa
         $scope.titulo = "CADASTRAR";
     };
 
-    mostrar();
     $scope.changeToList();
 
 });

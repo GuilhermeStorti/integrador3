@@ -59,7 +59,11 @@ angular.module("app").controller("cargoCtrl", function ($scope, cargoService) {
         $scope.titulo = "CADASTRAR";
     };
 
-    mostrar();
+    $scope.config = {
+        itemsPerPage: 5,
+        fillLastPage: true
+    };
+
     $scope.changeToList();
 
 });

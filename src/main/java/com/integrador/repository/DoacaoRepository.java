@@ -1,6 +1,7 @@
 package com.integrador.repository;
 
 import com.integrador.domain.Doacao;
+import com.integrador.domain.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +15,9 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
 
     @Query("select count(d) from Doacao d where d.dataOperacao > :primeiroDia")
     int findDonationsOfMounth(@Param("primeiroDia") Date primeiroDia);
+
+    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.dataOperacao = :primeiroDia and d.status = 'B'")
+    Double findValueOfDonationsOfMounth(@Param("primeiroDia") Date primeiroDia,
+                                        @Param("atendente")Funcionario atendente);
 
 }

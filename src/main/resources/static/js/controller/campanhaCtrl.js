@@ -61,7 +61,6 @@ angular.module("app").controller("campanhaCtrl", function ($scope, campanhaServi
         $scope.titulo = "CADASTRAR";
     };
 
-    mostrar();
     $scope.changeToList();
 
 });

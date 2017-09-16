@@ -67,7 +67,6 @@ angular.module("app").controller("usuarioCtrl", function ($scope, usuarioService
         $scope.titulo = "CADASTRAR";
     };
 
-    mostrar();
     $scope.changeToList();
 
 });

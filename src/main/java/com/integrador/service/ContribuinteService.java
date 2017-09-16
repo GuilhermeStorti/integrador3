@@ -1,6 +1,6 @@
 package com.integrador.service;
 
-import com.integrador.Utils.DateUtils;
+import com.integrador.utils.DateUtils;
 import com.integrador.domain.Contribuinte;
 import com.integrador.exception.ContribuinteAlreadyExistException;
 import com.integrador.exception.ContribuinteNotFoundException;

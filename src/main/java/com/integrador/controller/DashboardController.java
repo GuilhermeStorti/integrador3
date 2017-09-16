@@ -1,5 +1,6 @@
 package com.integrador.controller;
 
+import com.integrador.domain.Funcionario;
 import com.integrador.service.ContribuinteService;
 import com.integrador.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DashboardController {
 
     @Autowired
-    DoacaoService doacaoService;
+    private DoacaoService doacaoService;
 
     @Autowired
-    ContribuinteService contribuinteService;
+    private ContribuinteService contribuinteService;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/donationsOfMounth")
@@ -34,6 +35,13 @@ public class DashboardController {
     @RequestMapping(method = RequestMethod.GET, value = "/taxpayersSavesOfMounth")
     public ResponseEntity<?> findTaxpayersSavesOfMounth() {
         return ResponseEntity.status(HttpStatus.OK).body(this.contribuinteService.findSavesOfMounth());
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/findValueOfDonationsOfMounth")
+    public ResponseEntity<?> findValueOfDonationsOfMounth(){
+        Funcionario funcionario = new Funcionario();
+        return ResponseEntity.status(HttpStatus.OK).body(this.doacaoService.findValueOfDonationsOfMounth(funcionario));
     }
 
 }

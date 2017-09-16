@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Cargo;
+import com.integrador.representation.CargoRepresentation;
 import com.integrador.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +32,13 @@ public class CargoController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cargo>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<List<CargoRepresentation>> listAll() {
+        List<Cargo> cargos = this.service.findAll();
+        List<CargoRepresentation> representations = new ArrayList<>();
+        for (Cargo c : cargos){
+            representations.add(new CargoRepresentation(c));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
     }
 
     @CrossOrigin

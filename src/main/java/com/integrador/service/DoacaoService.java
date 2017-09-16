@@ -1,7 +1,8 @@
 package com.integrador.service;
 
-import com.integrador.Utils.DateUtils;
+import com.integrador.utils.DateUtils;
 import com.integrador.domain.Doacao;
+import com.integrador.domain.Funcionario;
 import com.integrador.exception.DoacaoAlreadyExistException;
 import com.integrador.exception.DoacaoNotFoundException;
 import com.integrador.repository.DoacaoRepository;
@@ -68,6 +69,10 @@ public class DoacaoService {
 
     public int findDonationsOfMounth(){
         return repository.findDonationsOfMounth(DateUtils.asDate(LocalDate.now().withDayOfMonth(1)));
+    }
+
+    public Double findValueOfDonationsOfMounth(Funcionario funcionario){
+        return repository.findValueOfDonationsOfMounth(DateUtils.asDate(LocalDate.now().withDayOfMonth(1)), funcionario);
     }
 
     private boolean exist( Integer id ) {
