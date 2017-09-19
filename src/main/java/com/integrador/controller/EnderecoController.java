@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Endereco;
+import com.integrador.representation.EnderecoRepresentation;
 import com.integrador.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,38 +31,25 @@ public class EnderecoController {
     private EnderecoService service;
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Endereco>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
-    }
-
-    @CrossOrigin
     @RequestMapping(value = "/{cep}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Endereco> findById(@PathVariable("cep") Integer cep) {
-        Endereco endereco = this.service.findById(cep);
-        return ResponseEntity.status(HttpStatus.OK).body(endereco);
+    ResponseEntity<?> findById(@PathVariable("cep") Integer cep) {
+        EnderecoRepresentation representation = new EnderecoRepresentation(this.service.findById(cep));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Endereco endereco) {
-        this.service.save(endereco);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cep}").buildAndExpand(endereco.getCep()).toUri();
+    public ResponseEntity<Void> save(@RequestBody EnderecoRepresentation representation) {
+        this.service.save(new EnderecoRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cep}").buildAndExpand(representation.getCep()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{cep}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Endereco endereco, @PathVariable("cep") Integer cep) {
-        this.service.update(endereco);
+    public ResponseEntity<Void> update(@RequestBody EnderecoRepresentation representation, @PathVariable("cep") Integer cep) {
+        this.service.update(new EnderecoRepresentation().build(representation));
         return ResponseEntity.noContent().build();
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/{cep}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable("cep") Integer cep) {
-        this.service.delete(cep);
-        return ResponseEntity.ok().build();
     }
 }

@@ -1,56 +1,31 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.integrador.domain.Cargo;
-import com.integrador.domain.Contribuinte;
-import com.integrador.domain.Endereco;
 import com.integrador.domain.Funcionario;
-import com.integrador.domain.Usuario;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by guilhermeplasma on 15/09/17.
  */
 public class FuncionarioRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String nome;
-    @JsonInclude
     private String sobrenome;
-    @JsonInclude
     private String sexo;
-    @JsonInclude
     private String cpf;
-    @JsonInclude
     private String email;
-    @JsonInclude
     private String telefone1;
-    @JsonInclude
     private String telefone2;
-    @JsonInclude
     private Integer numeroResidencia;
-    @JsonInclude
     private String complementoResidencia;
-    @JsonInclude
     private String situacao;
-    @JsonInclude
-    private Cargo cargo;
-    @JsonInclude
-    private Endereco endereco;
-    @JsonIgnore
-    private List<Contribuinte> contribuintes;
-    @JsonInclude
-    private Usuario usuario;
+    private CargoRepresentation cargo;
+    private EnderecoRepresentation endereco;
+    private UsuarioRepresentation usuario;
 
     public FuncionarioRepresentation() {
     }
 
-    public FuncionarioRepresentation(int id, String nome, String sobrenome, String sexo, String cpf, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao, Cargo cargo, Endereco endereco, List<Contribuinte> contribuintes, Usuario usuario) {
+    public FuncionarioRepresentation(int id, String nome, String sobrenome, String sexo, String cpf, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao, CargoRepresentation cargo, EnderecoRepresentation endereco, UsuarioRepresentation usuario) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -64,7 +39,6 @@ public class FuncionarioRepresentation {
         this.situacao = situacao;
         this.cargo = cargo;
         this.endereco = endereco;
-        this.contribuintes = contribuintes;
         this.usuario = usuario;
     }
 
@@ -80,10 +54,9 @@ public class FuncionarioRepresentation {
         this.numeroResidencia = f.getNumeroResidencia();
         this.complementoResidencia = f.getComplementoResidencia();
         this.situacao = f.getSituacao();
-        this.cargo = f.getCargo();
-        this.endereco = f.getEndereco();
-        this.contribuintes = f.getContribuintes();
-        this.usuario = f.getUsuario();
+        this.cargo = new CargoRepresentation(f.getCargo());
+        this.endereco = new EnderecoRepresentation(f.getEndereco());
+        this.usuario = new UsuarioRepresentation(f.getUsuario());
     }
 
     public Funcionario build(FuncionarioRepresentation r){
@@ -100,10 +73,9 @@ public class FuncionarioRepresentation {
         f.setNumeroResidencia(r.getNumeroResidencia());
         f.setComplementoResidencia(r.getComplementoResidencia());
         f.setSituacao(r.getSituacao());
-        f.setCargo(r.getCargo());
-        f.setEndereco(r.getEndereco());
-        f.setContribuintes(r.getContribuintes());
-        f.setUsuario(r.getUsuario());
+        f.setCargo(new CargoRepresentation().build(r.getCargo()));
+        f.setEndereco(new EnderecoRepresentation().build(r.getEndereco()));
+        f.setUsuario(new UsuarioRepresentation().build(r.getUsuario()));
 
         return f;
     }
@@ -196,35 +168,27 @@ public class FuncionarioRepresentation {
         this.situacao = situacao;
     }
 
-    public Cargo getCargo() {
+    public CargoRepresentation getCargo() {
         return cargo;
     }
 
-    public void setCargo(Cargo cargo) {
+    public void setCargo(CargoRepresentation cargo) {
         this.cargo = cargo;
     }
 
-    public Endereco getEndereco() {
+    public EnderecoRepresentation getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(EnderecoRepresentation endereco) {
         this.endereco = endereco;
     }
 
-    public List<Contribuinte> getContribuintes() {
-        return contribuintes;
-    }
-
-    public void setContribuintes(List<Contribuinte> contribuintes) {
-        this.contribuintes = contribuintes;
-    }
-
-    public Usuario getUsuario() {
+    public UsuarioRepresentation getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioRepresentation usuario) {
         this.usuario = usuario;
     }
 }

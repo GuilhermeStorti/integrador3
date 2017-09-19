@@ -1,11 +1,6 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.integrador.domain.Campanha;
-import com.integrador.domain.Contribuinte;
 import com.integrador.domain.Doacao;
-import com.integrador.domain.FormaPagamento;
-import com.integrador.domain.Funcionario;
 
 import java.util.Date;
 
@@ -14,35 +9,23 @@ import java.util.Date;
  */
 public class DoacaoRepresentation {
 
-    @JsonInclude
     private int numeroRecibo;
-    @JsonInclude
     private Double valor;
-    @JsonInclude
     private String status;
-    @JsonInclude
     private Date dataOperacao;
-    @JsonInclude
     private Date dataVencimento;
-    @JsonInclude
     private Date dataBaixa;
-    @JsonInclude
     private String parcela;
-    @JsonInclude
-    private Contribuinte contribuinte;
-    @JsonInclude
-    private Campanha campanha;
-    @JsonInclude
-    private FormaPagamento formaPagamento;
-    @JsonInclude
-    private Funcionario funcionarioMotoboy;
-    @JsonInclude
-    private Funcionario funcionarioAtendente;
+    private ContribuinteRepresentation contribuinte;
+    private CampanhaRepresentation campanha;
+    private FormaPagamentoRepresentation formaPagamento;
+    private FuncionarioRepresentation funcionarioMotoboy;
+    private FuncionarioRepresentation funcionarioAtendente;
 
     public DoacaoRepresentation() {
     }
 
-    public DoacaoRepresentation(int numeroRecibo, Double valor, String status, Date dataOperacao, Date dataVencimento, Date dataBaixa, String parcela, Contribuinte contribuinte, Campanha campanha, FormaPagamento formaPagamento, Funcionario funcionarioMotoboy, Funcionario funcionarioAtendente) {
+    public DoacaoRepresentation(int numeroRecibo, Double valor, String status, Date dataOperacao, Date dataVencimento, Date dataBaixa, String parcela, ContribuinteRepresentation contribuinte, CampanhaRepresentation campanha, FormaPagamentoRepresentation formaPagamento, FuncionarioRepresentation funcionarioMotoboy, FuncionarioRepresentation funcionarioAtendente) {
         this.numeroRecibo = numeroRecibo;
         this.valor = valor;
         this.status = status;
@@ -65,11 +48,11 @@ public class DoacaoRepresentation {
         this.dataVencimento = d.getDataVencimento();
         this.dataBaixa = d.getDataBaixa();
         this.parcela = d.getParcela();
-        this.contribuinte = d.getContribuinte();
-        this.campanha = d.getCampanha();
-        this.formaPagamento = d.getFormaPagamento();
-        this.funcionarioMotoboy = d.getFuncionarioMotoboy();
-        this.funcionarioAtendente = d.getFuncionarioAtendente();
+        this.contribuinte = new ContribuinteRepresentation(d.getContribuinte());
+        this.campanha = new CampanhaRepresentation(d.getCampanha());
+        this.formaPagamento = new FormaPagamentoRepresentation(d.getFormaPagamento());
+        this.funcionarioMotoboy = new FuncionarioRepresentation(d.getFuncionarioMotoboy());
+        this.funcionarioAtendente = new FuncionarioRepresentation(d.getFuncionarioAtendente());
     }
 
     public Doacao build(DoacaoRepresentation r){
@@ -82,11 +65,11 @@ public class DoacaoRepresentation {
         doacao.setDataVencimento(r.getDataVencimento());
         doacao.setDataBaixa(r.getDataBaixa());
         doacao.setParcela(r.getParcela());
-        doacao.setContribuinte(r.getContribuinte());
-        doacao.setCampanha(r.getCampanha());
-        doacao.setFormaPagamento(r.getFormaPagamento());
-        doacao.setFuncionarioMotoboy(r.getFuncionarioMotoboy());
-        doacao.setFuncionarioAtendente(r.getFuncionarioAtendente());
+        doacao.setContribuinte(new ContribuinteRepresentation().build(r.contribuinte));
+        doacao.setCampanha(new CampanhaRepresentation().build(r.campanha));
+        doacao.setFormaPagamento(new FormaPagamentoRepresentation().build(r.formaPagamento));
+        doacao.setFuncionarioMotoboy(new FuncionarioRepresentation().build(r.funcionarioMotoboy));
+        doacao.setFuncionarioAtendente(new FuncionarioRepresentation().build(r.funcionarioAtendente));
 
         return doacao;
     }
@@ -147,43 +130,43 @@ public class DoacaoRepresentation {
         this.parcela = parcela;
     }
 
-    public Contribuinte getContribuinte() {
+    public ContribuinteRepresentation getContribuinte() {
         return contribuinte;
     }
 
-    public void setContribuinte(Contribuinte contribuinte) {
+    public void setContribuinte(ContribuinteRepresentation contribuinte) {
         this.contribuinte = contribuinte;
     }
 
-    public Campanha getCampanha() {
+    public CampanhaRepresentation getCampanha() {
         return campanha;
     }
 
-    public void setCampanha(Campanha campanha) {
+    public void setCampanha(CampanhaRepresentation campanha) {
         this.campanha = campanha;
     }
 
-    public FormaPagamento getFormaPagamento() {
+    public FormaPagamentoRepresentation getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
+    public void setFormaPagamento(FormaPagamentoRepresentation formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
-    public Funcionario getFuncionarioMotoboy() {
+    public FuncionarioRepresentation getFuncionarioMotoboy() {
         return funcionarioMotoboy;
     }
 
-    public void setFuncionarioMotoboy(Funcionario funcionarioMotoboy) {
+    public void setFuncionarioMotoboy(FuncionarioRepresentation funcionarioMotoboy) {
         this.funcionarioMotoboy = funcionarioMotoboy;
     }
 
-    public Funcionario getFuncionarioAtendente() {
+    public FuncionarioRepresentation getFuncionarioAtendente() {
         return funcionarioAtendente;
     }
 
-    public void setFuncionarioAtendente(Funcionario funcionarioAtendente) {
+    public void setFuncionarioAtendente(FuncionarioRepresentation funcionarioAtendente) {
         this.funcionarioAtendente = funcionarioAtendente;
     }
 }

@@ -1,34 +1,21 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.integrador.domain.Empresa;
-
-import java.util.Date;
 
 /**
  * Created by guilhermeplasma on 15/09/17.
  */
 public class EmpresaRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String nomeFantasia;
-    @JsonInclude
     private String razaoSocial;
-    @JsonInclude
     private String cnpj;
-    @JsonInclude
     private String email;
-    @JsonInclude
     private String telefone1;
-    @JsonInclude
     private String telefone2;
-    @JsonInclude
     private Integer numeroResidencia;
-    @JsonInclude
     private String complementoResidencia;
-    @JsonInclude
     private String situacao;
 
     public EmpresaRepresentation() {

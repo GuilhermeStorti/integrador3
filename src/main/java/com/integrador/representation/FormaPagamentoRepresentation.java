@@ -1,7 +1,5 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.integrador.domain.FormaPagamento;
 import com.integrador.domain.FormaPagamento;
 
 /**
@@ -9,9 +7,7 @@ import com.integrador.domain.FormaPagamento;
  */
 public class FormaPagamentoRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String descricao;
 
     public FormaPagamentoRepresentation() {

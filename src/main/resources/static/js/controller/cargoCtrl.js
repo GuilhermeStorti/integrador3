@@ -59,9 +59,9 @@ angular.module("app").controller("cargoCtrl", function ($scope, cargoService) {
         $scope.titulo = "CADASTRAR";
     };
 
-    $scope.config = {
-        itemsPerPage: 5,
-        fillLastPage: true
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     };
 
     $scope.changeToList();

@@ -2449,9 +2449,10 @@ section.content {
   -ms-border-radius: 50%;
   border-radius: 50%; }
   .btn-circle i {
-    font-size: 18px;
     position: relative;
-    left: -1px; }
+    left: -9px;
+    top: -3px;
+    font-size: 2.5em !important;}
 
 .btn-link {
   font-weight: bold;
@@ -8040,3 +8041,6 @@ html.ie11 .dropdown-menu ul.menu li a {
 html.ie11 .bs-searchbox .form-control {
   width: 90%; }
 
+center{
+  text-align: center !important;
+}

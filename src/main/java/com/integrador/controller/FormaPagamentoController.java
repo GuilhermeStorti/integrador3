@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.FormaPagamento;
+import com.integrador.representation.FormaPagamentoRepresentation;
 import com.integrador.service.FormaPagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,23 +32,28 @@ public class FormaPagamentoController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<FormaPagamento>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<?> listAll() {
+        List<FormaPagamento> formaPagamentos = this.service.findAll();
+        List<FormaPagamentoRepresentation> representations = new ArrayList<>();
+        for(FormaPagamento f : formaPagamentos){
+            representations.add(new FormaPagamentoRepresentation(f));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<FormaPagamento> findById(@PathVariable("id") Integer id) {
-        FormaPagamento formaPagamento = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(formaPagamento);
+    ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        FormaPagamentoRepresentation representation = new FormaPagamentoRepresentation(service.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody FormaPagamento formaPagamento) {
-        this.service.save(formaPagamento);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(formaPagamento.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody FormaPagamentoRepresentation representation) {
+        this.service.save(new FormaPagamentoRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(representation.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

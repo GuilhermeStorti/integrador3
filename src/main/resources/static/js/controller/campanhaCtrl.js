@@ -1,4 +1,4 @@
-angular.module("app").controller("campanhaCtrl", function ($scope, campanhaService) {
+angular.module("app").controller("campanhaCtrl", function ($scope, campanhaService, dateUtils) {
 
     var mostrar = function()	{
         campanhaService.getCampanhas().success(function (data) {
@@ -26,8 +26,8 @@ angular.module("app").controller("campanhaCtrl", function ($scope, campanhaServi
 
     $scope.seleciona = function(campanha) {
         $scope.campanha = campanha;
-        $scope.campanha.dataInicio = new Date(...campanha.dataInicio.split("-").map((item, indice) => item - indice % 2));
-        $scope.campanha.dataFim = new Date(...campanha.dataFim.split("-").map((item, indice) => item - indice % 2));
+        $scope.campanha.dataInicio = dateUtils.timestampToDate(campanha.dataInicio);
+        $scope.campanha.dataFim = dateUtils.timestampToDate(campanha.dataFim);
         $scope.changeToEdit();
     };
 

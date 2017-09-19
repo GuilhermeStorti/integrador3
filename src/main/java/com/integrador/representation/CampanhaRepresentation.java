@@ -1,6 +1,5 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.integrador.domain.Campanha;
 
 import java.util.Date;
@@ -10,13 +9,9 @@ import java.util.Date;
  */
 public class CampanhaRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String descricao;
-    @JsonInclude
     private Date dataInicio;
-    @JsonInclude
     private Date dataFim;
 
     public CampanhaRepresentation() {

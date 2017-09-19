@@ -1,6 +1,5 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.integrador.domain.Contribuinte;
 
 import java.util.Date;
@@ -10,31 +9,18 @@ import java.util.Date;
  */
 public class ContribuinteRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String nome;
-    @JsonInclude
     private String sobrenome;
-    @JsonInclude
     private String tipo;
-    @JsonInclude
     private String sexo;
-    @JsonInclude
     private Date dataNascimento;
-    @JsonInclude
     private String email;
-    @JsonInclude
     private String telefone1;
-    @JsonInclude
     private String telefone2;
-    @JsonInclude
     private Integer numeroResidencia;
-    @JsonInclude
     private String complementoResidencia;
-    @JsonInclude
     private Date dataCadastro;
-    @JsonInclude
     private String situacao;
 
     public ContribuinteRepresentation() {

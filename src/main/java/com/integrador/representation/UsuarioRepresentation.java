@@ -1,6 +1,6 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.integrador.domain.Funcionario;
 import com.integrador.domain.Usuario;
 
@@ -9,26 +9,19 @@ import com.integrador.domain.Usuario;
  */
 public class UsuarioRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String nome;
-    @JsonInclude
     private String usuario;
-    @JsonInclude
     private String senha;
-    @JsonInclude
-    private Funcionario funcionario;
 
     public UsuarioRepresentation() {
     }
 
-    public UsuarioRepresentation(int id, String nome, String usuario, String senha, Funcionario funcionario) {
+    public UsuarioRepresentation(int id, String nome, String usuario, String senha) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
-        this.funcionario = funcionario;
     }
 
     public UsuarioRepresentation(Usuario u) {
@@ -36,7 +29,6 @@ public class UsuarioRepresentation {
         this.nome = u.getNome();
         this.usuario = u.getUsuario();
         this.senha = u.getSenha();
-        this.funcionario = u.getFuncionario();
     }
 
     public Usuario build(UsuarioRepresentation representation){
@@ -46,8 +38,7 @@ public class UsuarioRepresentation {
         usuario.setNome(representation.getNome());
         usuario.setUsuario(representation.getUsuario());
         usuario.setSenha(usuario.getSenha());
-        usuario.setFuncionario(representation.getFuncionario());
-        
+
         return usuario;
     }
 
@@ -81,13 +72,5 @@ public class UsuarioRepresentation {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
     }
 }

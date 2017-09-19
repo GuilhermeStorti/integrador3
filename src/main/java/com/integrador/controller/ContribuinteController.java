@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Contribuinte;
+import com.integrador.representation.ContribuinteRepresentation;
 import com.integrador.service.ContribuinteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,30 +32,35 @@ public class ContribuinteController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Contribuinte>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<?> listAll() {
+        List<Contribuinte> contribuintes = this.service.findAll();
+        List<ContribuinteRepresentation> representations = new ArrayList<>();
+        for(Contribuinte c : contribuintes){
+            representations.add(new ContribuinteRepresentation(c));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Contribuinte> findById(@PathVariable("id") Integer id) {
-        Contribuinte contribuinte = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(contribuinte);
+    ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        ContribuinteRepresentation representation = new ContribuinteRepresentation(this.service.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Contribuinte contribuinte) {
-        this.service.save(contribuinte);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(contribuinte.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody ContribuinteRepresentation representation) {
+        this.service.save(new ContribuinteRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(representation.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Contribuinte contribuinte, @PathVariable("id") Integer id) {
-        this.service.update(contribuinte);
+    public ResponseEntity<Void> update(@RequestBody ContribuinteRepresentation representation, @PathVariable("id") Integer id) {
+        this.service.update(new ContribuinteRepresentation().build(representation));
         return ResponseEntity.noContent().build();
     }
 

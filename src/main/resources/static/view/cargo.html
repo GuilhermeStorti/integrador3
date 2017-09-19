@@ -48,26 +48,43 @@
             </div>
             <!--TABELA DE LISTAGEM-->
             <div class="body table-responsive" ng-hide="!listagem">
+
+                <label for="search">Filtro</label>
+                <div class="form-group col-lg-3">
+                    <div class="form-line">
+                        <input type="text" id="search" class="form-control"
+                               ng-model="search" placeholder="Entre com o filtro.">
+                    </div>
+                </div>
+
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>#</th>
+                        <th ng-click="sort('id')" class="col-sm-1 center">ID
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('descricao')" class="center">DESCRIÇÃO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th class="center">#</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="cargo in cargos">
-                        <td>{{cargo.id}}</td>
-                        <td>{{cargo.descricao}}</td>
-                        <td>
+                    <tr dir-paginate="cargo in cargos | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+                        <td class="center">{{cargo.id}}</td>
+                        <td class="center">{{cargo.descricao}}</td>
+                        <td class="center">
                             <i ng-click="seleciona(cargo)"class="material-icons" title="Editar">mode_edit</i>
                         </td>
                     </tr>
                     </tbody>
                 </table>
 
-                <at-pagination at-list="list" at-config="config"></at-pagination>
+                <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true" >
+                </dir-pagination-controls>
             </div>
         </div>
     </div>

@@ -32,7 +32,7 @@ public class CargoController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<CargoRepresentation>> listAll() {
+    public ResponseEntity<?> listAll() {
         List<Cargo> cargos = this.service.findAll();
         List<CargoRepresentation> representations = new ArrayList<>();
         for (Cargo c : cargos){
@@ -43,24 +43,24 @@ public class CargoController {
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<Cargo> findById(@PathVariable("id") Integer id) {
-        Cargo cargo = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(cargo);
+    @ResponseBody
+    public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        CargoRepresentation representation = new CargoRepresentation(this.service.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Cargo cargo) {
-        this.service.save(cargo);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cargo.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody CargoRepresentation representation) {
+        this.service.save(new CargoRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(representation.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Cargo cargo, @PathVariable("id") Integer id) {
-        this.service.update(cargo);
+    public ResponseEntity<Void> update(@RequestBody CargoRepresentation representation, @PathVariable("id") Integer id) {
+        this.service.update(new CargoRepresentation().build(representation));
         return ResponseEntity.noContent().build();
     }
 

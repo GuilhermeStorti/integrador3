@@ -1,7 +1,6 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.integrador.domain.Contribuinte;
 import com.integrador.domain.Endereco;
 
@@ -12,29 +11,21 @@ import java.util.List;
  */
 public class EnderecoRepresentation {
 
-    @JsonInclude
     private int cep;
-    @JsonInclude
     private String logradouro;
-    @JsonInclude
     private String bairro;
-    @JsonInclude
     private String cidade;
-    @JsonInclude
     private String uf;
-    @JsonIgnore
-    private List<Contribuinte> contribuintes;
 
     public EnderecoRepresentation() {
     }
 
-    public EnderecoRepresentation(int cep, String logradouro, String bairro, String cidade, String uf, List<Contribuinte> contribuintes) {
+    public EnderecoRepresentation(int cep, String logradouro, String bairro, String cidade, String uf) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
         this.uf = uf;
-        this.contribuintes = contribuintes;
     }
 
     public EnderecoRepresentation(Endereco e) {
@@ -43,7 +34,6 @@ public class EnderecoRepresentation {
         this.bairro = e.getBairro();
         this.cidade = e.getCidade();
         this.uf = e.getUf();
-        this.contribuintes = e.getContribuintes();
     }
 
     public Endereco build(EnderecoRepresentation r){
@@ -54,7 +44,6 @@ public class EnderecoRepresentation {
         endereco.setBairro(r.getBairro());
         endereco.setCidade(r.getCidade());
         endereco.setUf(r.getUf());
-        endereco.setContribuintes(r.getContribuintes());
 
         return endereco;
     }
@@ -97,13 +86,5 @@ public class EnderecoRepresentation {
 
     public void setUf(String uf) {
         this.uf = uf;
-    }
-
-    public List<Contribuinte> getContribuintes() {
-        return contribuintes;
-    }
-
-    public void setContribuintes(List<Contribuinte> contribuintes) {
-        this.contribuintes = contribuintes;
     }
 }

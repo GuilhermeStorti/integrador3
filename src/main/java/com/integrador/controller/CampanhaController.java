@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Campanha;
+import com.integrador.representation.CampanhaRepresentation;
 import com.integrador.service.CampanhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,21 +32,27 @@ public class CampanhaController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Campanha>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<?> listAll() {
+        List<Campanha> campanhas = this.service.findAll();
+        List<CampanhaRepresentation> representations = new ArrayList<>();
+        for(Campanha c : campanhas){
+            representations.add(new CampanhaRepresentation(c));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Campanha> findById(@PathVariable("id") Integer id) {
-        Campanha campanha = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(campanha);
+    ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        CampanhaRepresentation representation = new CampanhaRepresentation(this.service.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Campanha campanha) {
+    public ResponseEntity<Void> save(@RequestBody CampanhaRepresentation representation) {
+        Campanha campanha = new CampanhaRepresentation().build(representation);
         this.service.save(campanha);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(campanha.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -52,7 +60,8 @@ public class CampanhaController {
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Campanha campanha, @PathVariable("id") Integer id) {
+    public ResponseEntity<Void> update(@RequestBody CampanhaRepresentation representation, @PathVariable("id") Integer id) {
+        Campanha campanha = new CampanhaRepresentation().build(representation);
         this.service.update(campanha);
         return ResponseEntity.noContent().build();
     }

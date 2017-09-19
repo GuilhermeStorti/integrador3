@@ -32,7 +32,7 @@ public class UsuarioController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<UsuarioRepresentation>> listAll() {
+    public ResponseEntity<?> listAll() {
         List<Usuario> usuarios = this.service.findAll();
         List<UsuarioRepresentation> representations = new ArrayList<>();
         for (Usuario u : usuarios){
@@ -44,23 +44,23 @@ public class UsuarioController {
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Usuario> findById(@PathVariable("id") Integer id) {
-        Usuario usuario = this.service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(usuario);
+    ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        UsuarioRepresentation representation = new UsuarioRepresentation(this.service.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Usuario usuario) {
-        this.service.save(usuario);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();
+    public ResponseEntity<Void> save(@RequestBody UsuarioRepresentation representation) {
+        this.service.save(new UsuarioRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(representation.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Usuario usuario, @PathVariable("id") Integer id) {
-        this.service.update(usuario);
+    public ResponseEntity<Void> update(@RequestBody UsuarioRepresentation representation, @PathVariable("id") Integer id) {
+        this.service.update(new UsuarioRepresentation().build(representation));
         return ResponseEntity.noContent().build();
     }
 

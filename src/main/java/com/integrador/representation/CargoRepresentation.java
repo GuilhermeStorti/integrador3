@@ -1,6 +1,5 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.integrador.domain.Cargo;
 
 /**
@@ -8,9 +7,7 @@ import com.integrador.domain.Cargo;
  */
 public class CargoRepresentation {
 
-    @JsonInclude
     private int id;
-    @JsonInclude
     private String descricao;
 
     public CargoRepresentation() {

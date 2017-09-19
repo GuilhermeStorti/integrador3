@@ -1,6 +1,7 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Doacao;
+import com.integrador.representation.DoacaoRepresentation;
 import com.integrador.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,30 +32,35 @@ public class DoacaoController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Doacao>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAll());
+    public ResponseEntity<?> listAll() {
+        List<Doacao> doacaos = this.service.findAll();
+        List<DoacaoRepresentation> representations = new ArrayList<>();
+        for(Doacao d : doacaos){
+            representations.add(new DoacaoRepresentation(d));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{numeroRecibo }", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Doacao> findById( @PathVariable("numeroRecibo ") Integer numeroRecibo ) {
-        Doacao doacao = this.service.findById(numeroRecibo );
-        return ResponseEntity.status(HttpStatus.OK).body(doacao);
+    ResponseEntity<?> findById( @PathVariable("numeroRecibo ") Integer numeroRecibo) {
+        DoacaoRepresentation representation = new DoacaoRepresentation(this.service.findById(numeroRecibo));
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Doacao doacao) {
-        this.service.save(doacao);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{numeroRecibo }").buildAndExpand(doacao.getNumeroRecibo()).toUri();
+    public ResponseEntity<Void> save(@RequestBody DoacaoRepresentation representation) {
+        this.service.save(new DoacaoRepresentation().build(representation));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{numeroRecibo }").buildAndExpand(representation.getNumeroRecibo()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{numeroRecibo }", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Doacao doacao, @PathVariable("numeroRecibo ") Integer numeroRecibo ) {
-        this.service.update(doacao);
+    public ResponseEntity<Void> update(@RequestBody DoacaoRepresentation representation, @PathVariable("numeroRecibo ") Integer numeroRecibo ) {
+        this.service.update(new DoacaoRepresentation().build(representation));
         return ResponseEntity.noContent().build();
     }
 
