@@ -60,20 +60,20 @@
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                     <tr>
-                        <th ng-click="sort('id')" class="col-sm-1 center">ID
+                        <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
                             <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th ng-click="sort('descricao')" class="center">DESCRIÇÃO
+                        <th ng-click="sort('descricao')" style="text-align: center">DESCRIÇÃO
                             <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th class="center">#</th>
+                        <th class="col-sm-1" style="text-align: center">#</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr dir-paginate="cargo in cargos | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
-                        <td class="center">{{cargo.id}}</td>
-                        <td class="center">{{cargo.descricao}}</td>
-                        <td class="center">
+                        <td style="text-align: center">{{cargo.id}}</td>
+                        <td style="text-align: center">{{cargo.descricao}}</td>
+                        <td style="text-align: center">
                             <i ng-click="seleciona(cargo)"class="material-icons" title="Editar">mode_edit</i>
                         </td>
                     </tr>
