@@ -1,0 +1,72 @@
+<div>
+        <div class="row clearfix">
+            <div class="col-sm-4">
+                <b>CEP</b>
+                <div class="input-group">
+                    <div class="form-line">
+                        <input type="text" ng-model="address.cep" class="form-control key" placeholder="Digite CEP (Somente números)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 cep">
+                <button type="button" data-ng-click="buscarCep()" class="btn bg-green btn-block waves-effect">BUSCAR</button>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-sm-6">
+                <label for="logradouro">Logradouro</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="logradouro" class="form-control" ng-required="true"
+                               ng-model="address.logradouro" placeholder="Logradouro">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="bairro">Bairro</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="bairro" class="form-control" ng-required="true"
+                               ng-model="address.bairro" placeholder="Bairro">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="cidade">Cidade</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="cidade" class="form-control" ng-required="true"
+                               ng-model="address.cidade" placeholder="Cidade">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label for="uf">UF</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="uf" class="form-control" ng-required="true"
+                               ng-model="address.uf" placeholder="UF">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label for="numero">Número</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="numero" class="form-control" ng-required="true"
+                               ng-model="address.numero" placeholder="Nº">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label>Complemento</label>
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="text" id="complemento" class="form-control" ng-required="true"
+                               ng-model="address.complemento" placeholder="Complemento">
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

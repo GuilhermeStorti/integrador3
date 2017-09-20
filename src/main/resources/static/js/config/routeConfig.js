@@ -1,4 +1,5 @@
 angular.module("app").config(function ($routeProvider) {
+
     $routeProvider.when("/campanha", {
         templateUrl: "view/campanha.html",
         controller: "campanhaCtrl"
@@ -18,6 +19,14 @@ angular.module("app").config(function ($routeProvider) {
     $routeProvider.when("/dashboard", {
         templateUrl: "view/dashboard.html",
         controller: "dashboardCtrl"
+    });
+    $routeProvider.when("/funcionario", {
+        templateUrl: "view/funcionarios.html",
+        controller: "funcionarioCtrl"
+    });
+    $routeProvider.when("/cep", {
+        templateUrl: "view/cep.html",
+        controller: "cepCtrl"
     });
 
     $routeProvider.otherwise({redirectTo: "#"});
