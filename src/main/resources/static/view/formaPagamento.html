@@ -48,19 +48,32 @@
             </div>
             <!--TABELA DE LISTAGEM-->
             <div class="body table-responsive" ng-hide="!listagem">
+
+                <label for="search">Filtro</label>
+                <div class="form-group col-lg-3">
+                    <div class="form-line">
+                        <input type="text" id="search" class="form-control"
+                               ng-model="search" placeholder="Entre com o filtro.">
+                    </div>
+                </div>
+
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>#</th>
+                        <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('descricao')" style="text-align: center">DESCRIÇÃO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th class="col-sm-1" style="text-align: center">#</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="formaPagamento in formaPagamentos">
-                        <td>{{formaPagamento.id}}</td>
-                        <td>{{formaPagamento.descricao}}</td>
-                        <td>
+                    <tr dir-paginate="formaPagamento in formaPagamentos | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+                        <td style="text-align: center">{{formaPagamento.id}}</td>
+                        <td style="text-align: center">{{formaPagamento.descricao}}</td>
+                        <td style="text-align: center">
                             <i ng-click="seleciona(formaPagamento)"class="material-icons" title="Editar">mode_edit</i>
                         </td>
                     </tr>

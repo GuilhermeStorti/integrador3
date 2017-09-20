@@ -81,25 +81,39 @@
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>DATA INICIO</th>
-                        <th>DATA FIM</th>
-                        <th>#</th>
+                        <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('descricao')" style="text-align: center">DESCRIÇÃO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('dataInicio')" style="text-align: center">DATA INICIO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='dataInicio'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('dataFim')" style="text-align: center">DATA FIM
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='dataFim'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th class="col-sm-1" style="text-align: center">#</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="campanha in campanhas | filter : search">
-                        <td>{{campanha.id}}</td>
-                        <td>{{campanha.descricao}}</td>
-                        <td>{{campanha.dataInicio | date:'dd/MM/yyyy'}}</td>
-                        <td>{{campanha.dataFim | date:'dd/MM/yyyy'}}</td>
-                        <td>
+                    <tr dir-paginate="campanha in campanhas | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+                        <td style="text-align: center">{{campanha.id}}</td>
+                        <td style="text-align: center">{{campanha.descricao}}</td>
+                        <td style="text-align: center">{{campanha.dataInicio | date:'dd/MM/yyyy'}}</td>
+                        <td style="text-align: center">{{campanha.dataFim | date:'dd/MM/yyyy'}}</td>
+                        <td style="text-align: center">
                             <i ng-click="seleciona(campanha)"class="material-icons" title="Editar">mode_edit</i>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true" >
+                </dir-pagination-controls>
             </div>
         </div>
     </div>
