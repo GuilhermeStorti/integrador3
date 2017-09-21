@@ -133,6 +133,14 @@ public class Empresa {
         return this;
     }
 
+    public Endereco getCep() {
+        return cep;
+    }
+
+    public void setCep(Endereco cep) {
+        this.cep = cep;
+    }
+
     @Override
     public boolean equals( Object o ) {
         if ( this == o ) return true;

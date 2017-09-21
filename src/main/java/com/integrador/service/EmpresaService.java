@@ -20,6 +20,9 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository repository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
 
     @Transactional(readOnly = true)
     public List<Empresa> findAll(){
@@ -40,6 +43,9 @@ public class EmpresaService {
         if(exist( empresa.getId() )){
             throw new EmpresaAlreadyExistException ("Empresa com este id já existe " + empresa.getId());
         }
+        if(!existEndereco(empresa.getCep().getCep())){
+            empresa.setCep(enderecoRepository.save(empresa.getCep()));
+        }
         return this.repository.save(empresa);
     }
 
@@ -47,6 +53,9 @@ public class EmpresaService {
     public Empresa update(Empresa empresa){
         if(!exist( empresa.getId() )){
             throw new EmpresaNotFoundException("Empresa com este id não existe " + empresa.getId());
+        }
+        if(!existEndereco(empresa.getCep().getCep())){
+            empresa.setCep(enderecoRepository.save(empresa.getCep()));
         }
         return this.repository.save(empresa);
     }
@@ -69,5 +78,9 @@ public class EmpresaService {
 
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
+    }
+
+    private boolean existEndereco( Integer cep ) {
+        return this.enderecoRepository.exists( cep );
     }
 }

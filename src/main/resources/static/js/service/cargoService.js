@@ -1,18 +1,18 @@
 angular.module("app").factory("cargoService", function ($http, defaultUrl) {
     var _getCargos = function () {
-        return $http.get(defaultUrl + "/cargo");
+        return $http.get(defaultUrl.getServerUrl() + "/cargo");
     };
 
     var _saveCargo = function (cargo) {
-        return $http.post(defaultUrl + "/cargo", cargo);
+        return $http.post(defaultUrl.getServerUrl() + "/cargo", cargo);
     };
 
     var _updateCargo = function (cargo) {
-        return $http.put(defaultUrl + "/cargo" + "/" + cargo.id, cargo);
+        return $http.put(defaultUrl.getServerUrl() + "/cargo" + "/" + cargo.id, cargo);
     };
 
     var _deleteCargo = function (id) {
-        return $http.delete(defaultUrl + "/cargo" + "/" + id);
+        return $http.delete(defaultUrl.getServerUrl() + "/cargo" + "/" + id);
     };
 
     return {

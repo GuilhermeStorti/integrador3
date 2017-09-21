@@ -24,9 +24,9 @@ angular.module("app").config(function ($routeProvider) {
         templateUrl: "view/funcionarios.html",
         controller: "funcionarioCtrl"
     });
-    $routeProvider.when("/cep", {
-        templateUrl: "view/cep.html",
-        controller: "cepCtrl"
+    $routeProvider.when("/empresa", {
+        templateUrl: "view/empresa.html",
+        controller: "empresaCtrl"
     });
 
     $routeProvider.otherwise({redirectTo: "#"});

@@ -1,10 +1,6 @@
 package com.integrador.representation;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.integrador.domain.Contribuinte;
 import com.integrador.domain.Endereco;
-
-import java.util.List;
 
 /**
  * Created by guilhermeplasma on 15/09/17.

@@ -1,10 +1,10 @@
 angular.module("app").factory("dashboardService", function ($http, defaultUrl) {
     var _getDonationsOfMounth = function () {
-        return $http.get(defaultUrl + "/dashboard/donationsOfMounth");
+        return $http.get(defaultUrl.getServerUrl() + "/dashboard/donationsOfMounth");
     };
 
     var _getTaxpayersSavesOfMounth = function () {
-        return $http.get(defaultUrl + "/dashboard/taxpayersSavesOfMounth");
+        return $http.get(defaultUrl.getServerUrl() + "/dashboard/taxpayersSavesOfMounth");
     };
 
     return {

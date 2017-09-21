@@ -2,3 +2,5 @@
 /integrador3.iml
 /target/
 /.idea/
+/build/
+/.gradle/

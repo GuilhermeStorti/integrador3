@@ -7,7 +7,7 @@ import com.integrador.domain.Empresa;
  */
 public class EmpresaRepresentation {
 
-    private int id;
+    private String id;
     private String nomeFantasia;
     private String razaoSocial;
     private String cnpj;
@@ -17,11 +17,12 @@ public class EmpresaRepresentation {
     private Integer numeroResidencia;
     private String complementoResidencia;
     private String situacao;
+    private EnderecoRepresentation cep;
 
     public EmpresaRepresentation() {
     }
 
-    public EmpresaRepresentation(int id, String nomeFantasia, String razaoSocial, String cnpj, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao) {
+    public EmpresaRepresentation(String id, String nomeFantasia, String razaoSocial, String cnpj, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao, EnderecoRepresentation cep) {
         this.id = id;
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
@@ -32,10 +33,11 @@ public class EmpresaRepresentation {
         this.numeroResidencia = numeroResidencia;
         this.complementoResidencia = complementoResidencia;
         this.situacao = situacao;
+        this.cep = cep;
     }
 
     public EmpresaRepresentation(Empresa e) {
-        this.id = e.getId();
+        this.id = Integer.toString(e.getId());
         this.nomeFantasia = e.getNomeFantasia();
         this.razaoSocial = e.getRazaoSocial();
         this.cnpj = e.getCnpj();
@@ -45,12 +47,13 @@ public class EmpresaRepresentation {
         this.numeroResidencia = e.getNumeroResidencia();
         this.complementoResidencia = e.getComplementoResidencia();
         this.situacao = e.getSituacao();
+        this.cep = new EnderecoRepresentation(e.getCep());
     }
 
     public Empresa build(EmpresaRepresentation r){
         Empresa empresa = new Empresa();
 
-        empresa.setId(r.getId());
+        empresa.setId(Integer.parseInt(r.getId()));
         empresa.setNomeFantasia(r.getNomeFantasia());
         empresa.setRazaoSocial(r.getRazaoSocial());
         empresa.setCnpj(r.getCnpj());
@@ -60,15 +63,16 @@ public class EmpresaRepresentation {
         empresa.setNumeroResidencia(r.getNumeroResidencia());
         empresa.setComplementoResidencia(r.getComplementoResidencia());
         empresa.setSituacao(r.getSituacao());
+        empresa.setCep(new EnderecoRepresentation().build(r.getCep()));
 
         return empresa;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -142,5 +146,13 @@ public class EmpresaRepresentation {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public EnderecoRepresentation getCep() {
+        return cep;
+    }
+
+    public void setCep(EnderecoRepresentation cep) {
+        this.cep = cep;
     }
 }
