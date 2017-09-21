@@ -1,15 +1,18 @@
 package com.integrador.service;
 
-import com.integrador.utils.DateUtils;
 import com.integrador.domain.Contribuinte;
 import com.integrador.exception.ContribuinteAlreadyExistException;
 import com.integrador.exception.ContribuinteNotFoundException;
 import com.integrador.repository.ContribuinteRepository;
+import com.integrador.repository.EnderecoRepository;
+import com.integrador.repository.FuncionarioRepository;
+import com.integrador.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +23,12 @@ public class ContribuinteService {
 
     @Autowired
     private ContribuinteRepository repository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
     @Transactional(readOnly = true)
     public List<Contribuinte> findAll(){
@@ -40,6 +49,11 @@ public class ContribuinteService {
         if(exist( contribuinte.getId() )){
             throw new ContribuinteAlreadyExistException("Contribuinte com este id já existe " + contribuinte.getId());
         }
+        if(!existEndereco(contribuinte.getCep().getCep())){
+            contribuinte.setCep(enderecoRepository.save(contribuinte.getCep()));
+        }
+        contribuinte.setFuncionario(funcionarioRepository.findOne(1));
+        contribuinte.setDataCadastro(new Date());
         return this.repository.save(contribuinte);
     }
 
@@ -47,6 +61,9 @@ public class ContribuinteService {
     public Contribuinte update(Contribuinte contribuinte){
         if(!exist( contribuinte.getId() )){
             throw new ContribuinteNotFoundException("Contribuinte com este id não existe " + contribuinte.getId());
+        }
+        if(!existEndereco(contribuinte.getCep().getCep())){
+            contribuinte.setCep(enderecoRepository.save(contribuinte.getCep()));
         }
         return this.repository.save(contribuinte);
     }
@@ -73,5 +90,9 @@ public class ContribuinteService {
 
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
+    }
+
+    private boolean existEndereco( Integer cep ) {
+        return this.enderecoRepository.exists( cep );
     }
 }

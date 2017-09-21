@@ -1,6 +1,7 @@
 package com.integrador.representation;
 
 import com.integrador.domain.Contribuinte;
+import com.integrador.domain.Endereco;
 
 import java.util.Date;
 
@@ -22,11 +23,12 @@ public class ContribuinteRepresentation {
     private String complementoResidencia;
     private Date dataCadastro;
     private String situacao;
+    private EnderecoRepresentation cep;
 
     public ContribuinteRepresentation() {
     }
 
-    public ContribuinteRepresentation(int id, String nome, String sobrenome, String tipo, String sexo, Date dataNascimento, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, Date dataCadastro, String situacao) {
+    public ContribuinteRepresentation(int id, String nome, String sobrenome, String tipo, String sexo, Date dataNascimento, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, Date dataCadastro, String situacao, EnderecoRepresentation cep) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -40,6 +42,7 @@ public class ContribuinteRepresentation {
         this.complementoResidencia = complementoResidencia;
         this.dataCadastro = dataCadastro;
         this.situacao = situacao;
+        this.cep = cep;
     }
 
     public ContribuinteRepresentation(Contribuinte c) {
@@ -56,6 +59,7 @@ public class ContribuinteRepresentation {
         this.complementoResidencia = c.getComplementoResidencia();
         this.dataCadastro = c.getDataCadastro();
         this.situacao = c.getSituacao();
+        this.cep = new EnderecoRepresentation(c.getCep());
     }
 
     public Contribuinte build(ContribuinteRepresentation r){
@@ -74,6 +78,7 @@ public class ContribuinteRepresentation {
         c.setComplementoResidencia(r.getComplementoResidencia());
         c.setDataCadastro(r.getDataCadastro());
         c.setSituacao(r.getSituacao());
+        c.setCep(new EnderecoRepresentation().build(r.cep));
 
         return c;
     }
@@ -180,5 +185,13 @@ public class ContribuinteRepresentation {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public EnderecoRepresentation getCep() {
+        return cep;
+    }
+
+    public void setCep(EnderecoRepresentation cep) {
+        this.cep = cep;
     }
 }

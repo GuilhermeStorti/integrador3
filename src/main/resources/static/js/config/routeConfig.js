@@ -28,6 +28,10 @@ angular.module("app").config(function ($routeProvider) {
         templateUrl: "view/empresa.html",
         controller: "empresaCtrl"
     });
+    $routeProvider.when("/contribuinte", {
+        templateUrl: "view/contribuinte.html",
+        controller: "contribuinteCtrl"
+    });
 
     $routeProvider.otherwise({redirectTo: "#"});
 });
