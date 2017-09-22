@@ -1,7 +1,6 @@
 package com.integrador.representation;
 
 import com.integrador.domain.Contribuinte;
-import com.integrador.domain.Endereco;
 
 import java.util.Date;
 

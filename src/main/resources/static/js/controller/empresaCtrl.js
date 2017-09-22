@@ -73,6 +73,7 @@ angular.module("app").controller("empresaCtrl", function ($scope, empresaService
 
     $scope.limpar = function () {
         delete $scope.empresa;
+        delete $scope.address;
     };
 
     $scope.changeToEdit = function () {

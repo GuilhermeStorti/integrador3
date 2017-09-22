@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +41,8 @@ public class DoacaoService {
         if(exist( doacao.getNumeroRecibo() )){
             throw new DoacaoAlreadyExistException ("Doacao com este id já existe " + doacao.getNumeroRecibo());
         }
+        doacao.setDataOperacao(new Date());
+        doacao.setStatus("G");
         return this.repository.save(doacao);
     }
 

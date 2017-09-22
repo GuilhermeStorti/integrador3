@@ -32,6 +32,10 @@ angular.module("app").config(function ($routeProvider) {
         templateUrl: "view/contribuinte.html",
         controller: "contribuinteCtrl"
     });
+    $routeProvider.when("/doacao", {
+        templateUrl: "view/doacao.html",
+        controller: "doacaoCtrl"
+    });
 
     $routeProvider.otherwise({redirectTo: "#"});
 });

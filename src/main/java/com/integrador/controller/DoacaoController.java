@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/recibo")
+@RequestMapping("/doacao")
 public class DoacaoController {
 
     @Autowired

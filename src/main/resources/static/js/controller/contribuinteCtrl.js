@@ -74,6 +74,7 @@ angular.module("app").controller("contribuinteCtrl", function ($scope, contribui
 
     $scope.limpar = function () {
         delete $scope.contribuinte;
+        delete $scope.address;
     };
 
     $scope.changeToEdit = function () {

@@ -1,14 +1,14 @@
 angular.module("app").factory("funcionarioService", function ($http, defaultUrl) {
     var _getFuncionarios = function () {
-        return $http.get(defaultUrl + "/funcionario");
+        return $http.get(defaultUrl.getServerUrl() + "/funcionario");
     };
 
     var _saveFuncionario = function (funcionario) {
-        return $http.post(defaultUrl + "/funcionario", funcionario);
+        return $http.post(defaultUrl.getServerUrl() + "/funcionario", funcionario);
     };
 
     var _updateFuncionario = function (funcionario) {
-        return $http.put(defaultUrl + "/funcionario" + "/" + funcionario.id, funcionario);
+        return $http.put(defaultUrl.getServerUrl() + "/funcionario" + "/" + funcionario.id, funcionario);
     };
 
     var _getCep = function (cep) {
