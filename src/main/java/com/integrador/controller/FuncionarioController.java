@@ -70,4 +70,12 @@ public class FuncionarioController {
         this.service.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/findAtualMotoboy", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<?> findAtualMotoboy() {
+        FuncionarioRepresentation representation = new FuncionarioRepresentation(this.service.findAtualMotoboy());
+        return ResponseEntity.status(HttpStatus.OK).body(representation);
+    }
 }

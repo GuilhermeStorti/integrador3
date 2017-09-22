@@ -43,6 +43,10 @@ public class ContribuinteService {
         return this.repository.findOne( id );
     }
 
+    @Transactional(readOnly = true)
+    public List<Contribuinte> findByNome(String nome){
+        return this.repository.findByNome( nome );
+    }
 
     @Transactional(readOnly = false)
     public Contribuinte save(Contribuinte contribuinte){

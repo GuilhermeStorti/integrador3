@@ -1,18 +1,10 @@
-angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, campanhaService, contribuinteService, funcionarioService, dateUtils, formaPagamentoService) {
+angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, campanhaService, contribuinteService,
+                                                         funcionarioService, dateUtils, formaPagamentoService) {
+    var funcionarioMotoboy = {};
 
     var carregarListas = function () {
-        campanhaService.getCampanhas().success(function (data) {
-            $scope.campanhas = data;
-        }).error(function (data, status) {
-            alert("ops!! erro na chamada getCampanhas");
-        });
-        contribuinteService.getContribuintes().success(function (data) {
-            $scope.contribuintes = data;
-        }).error(function (data, status) {
-            alert("ops!! erro na chamada getContribuintes");
-        });
-        funcionarioService.getFuncionarios().success(function (data) {
-            $scope.funcionarios = data;
+        funcionarioService.findAtualMotoboy().success(function (data) {
+            funcionarioMotoboy = data;
         }).error(function (data, status) {
             alert("ops!! erro ao trazer o funcionarios");
         });
@@ -65,8 +57,19 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
         $scope.changeToEdit();
     };
 
+    $scope.selecionaCampanha = function(campanha) {
+        $scope.doacao.campanha = campanha;
+        $scope.doacao.campanha.dataInicio = dateUtils.timestampToDate(campanha.dataInicio);
+        $scope.doacao.campanha.dataFim = dateUtils.timestampToDate(campanha.dataFim);
+    };
+
+    $scope.selecionaContribuinte = function(contribuinte) {
+        $scope.doacao.contribuinte = contribuinte;
+        $scope.doacao.contribuinte.dataNascimento = dateUtils.timestampToDate(contribuinte.dataNascimento);
+    };
+
     $scope.limpar = function () {
-        delete $scope.doacao;
+        $scope.doacao = {};
     };
 
     $scope.changeToEdit = function () {
@@ -88,6 +91,8 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
 
     $scope.changeToSave = function () {
         $scope.limpar();
+        $scope.motoboyNome = funcionarioMotoboy.nome + " " + funcionarioMotoboy.sobrenome;
+        $scope.doacao.funcionarioMotoboy = funcionarioMotoboy;
         $scope.cadastro = true;
         $scope.listagem = false;
         $scope.edicao = false;
@@ -100,7 +105,23 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     };
 
-    carregarListas();
+    $scope.buscarCampanha = function () {
+        campanhaService.findByDescricao($scope.campanhaBusca).success(function (data) {
+            $scope.campanhas = data;
+        }).error(function (data, status) {
+            alert("ops!! erro na chamada Campanha.findByDescricao");
+        });
+    };
+
+    $scope.buscarContribuinte = function () {
+        contribuinteService.findByName($scope.contribuinteBusca).success(function (data) {
+            $scope.contribuintes = data;
+        }).error(function (data, status) {
+            alert("ops!! erro na chamada Campanha.findByDescricao");
+        });
+    };
+
     $scope.changeToList();
+    carregarListas();
 
 });

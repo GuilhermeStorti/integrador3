@@ -15,11 +15,15 @@ angular.module("app").factory("funcionarioService", function ($http, defaultUrl)
         return $http.get("https://viacep.com.br/ws/" + cep + "/json/");
     };
 
+    var _findAtualMotoboy = function () {
+        return $http.get(defaultUrl.getServerUrl() + "/funcionario/findAtualMotoboy");
+    };
 
     return {
         getFuncionarios: _getFuncionarios,
         saveFuncionario: _saveFuncionario,
         updateFuncionario: _updateFuncionario,
-        getCep: _getCep
+        getCep: _getCep,
+        findAtualMotoboy: _findAtualMotoboy
     };
 });

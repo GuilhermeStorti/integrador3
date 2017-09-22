@@ -32,6 +32,10 @@ public class CampanhaService {
         return this.repository.findOne( id );
     }
 
+    @Transactional(readOnly = true)
+    public List<Campanha> findByDescricao(String descricao){
+        return this.repository.findByDescricao(descricao);
+    }
 
     @Transactional(readOnly = false)
     public Campanha save(Campanha campanha){

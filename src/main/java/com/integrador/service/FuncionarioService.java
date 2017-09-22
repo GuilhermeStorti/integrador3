@@ -64,6 +64,11 @@ public class FuncionarioService {
         this.repository.delete(id);
     }
 
+    @Transactional(readOnly = false)
+    public Funcionario findAtualMotoboy(){
+        return repository.findAtualMotoboy();
+    }
+
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
     }

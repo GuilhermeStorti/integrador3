@@ -50,6 +50,18 @@ public class CampanhaController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/filtroDescricao/{descricao}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<?> findByDescricao(@PathVariable("descricao") String descricao) {
+        List<Campanha> campanhas = this.service.findByDescricao(descricao);
+        List<CampanhaRepresentation> representations = new ArrayList<>();
+        for(Campanha c : campanhas){
+            representations.add(new CampanhaRepresentation(c));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
+    }
+
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@RequestBody CampanhaRepresentation representation) {
         Campanha campanha = new CampanhaRepresentation().build(representation);

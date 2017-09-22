@@ -30,14 +30,57 @@
 
             <!--CADASTRO/EDIÇÂO-->
             <div class="body" ng-hide="listagem" >
+
                 <form name="cadastroForm">
                     <div class="row clearfix">
-                        <div class="col-sm-4">
-                            <label for="repeatCampanha">Campanha</label>
-                            <select class="form-control show-tick" name="repeatCampanha" id="repeatCampanha" ng-model="doacao.campanha">
-                                <option ng-repeat="campanha in campanhas" value="{{campanha}}">{{campanha.descricao}}</option>
-                            </select>
+                        <!--CAMPANHA-->
+                        <div class="col-lg-4">
+                            <div class="row clearfix">
+                                <div class="col-lg-9">
+                                    <label for="campanha">Campanha</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="campanha" ng-model="doacao.campanha.descricao" class="form-control"
+                                                   placeholder="Descrição" ng-required="true" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" class="btn btn-primary btn-lg m-l-15 waves-effect"
+                                            data-toggle="modal" data-target="#modalCampanha" style="margin-top: 24px;">Buscar</button>
+                                </div>
+                            </div>
                         </div>
+                        <!--CONTRIBUINTE-->
+                        <div class="col-lg-4">
+                            <div class="row clearfix">
+                                <div class="col-lg-9">
+                                    <label for="contribuinte">Contribuinte</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="contribuinte" ng-model="doacao.contribuinte.nome" class="form-control"
+                                                   placeholder="Nome" ng-required="true" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" class="btn btn-primary btn-lg m-l-15 waves-effect"
+                                            data-toggle="modal" data-target="#modalContribuinte" style="margin-top: 24px;">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--MOTOBOY-->
+                        <div class="col-lg-4">
+                            <label for="motoboy">Motoboy</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="motoboy" ng-model="motoboyNome" class="form-control"
+                                           placeholder="Nome" ng-required="true" ng-disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row clearfix">
                         <div class="col-sm-4">
                             <label for="repeatContribuinte">Contribuinte</label>
                             <select class="form-control show-tick" name="repeatContribuinte" id="repeatContribuinte" ng-model="doacao.contribuinte">
@@ -81,7 +124,7 @@
                         </div>
                     </div>
                 </form>
-
+-->
                 <button data-ng-click="salvar()" type="button" ng-disabled="cadastroForm.$invalid"
                         class="btn btn-primary m-t-15 waves-effect" ng-if="cadastro">CADASTRAR</button>
 
@@ -135,6 +178,158 @@
                         direction-links="true"
                         boundary-links="true" >
                 </dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ModalCampanha -->
+<div class="modal fade" id="modalCampanha" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">Busca de campanhas</h4>
+            </div>
+            <div class="modal-body">
+                <!--Filtros-->
+                <div class="body">
+                    <form id="campanhaFiltroForm">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" ng-model="campanhaBusca" class="form-control" placeholder="Descrição" ng-required="true" ng-minlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                <button id="descricaoBusca" ng-click="buscarCampanha()" type="button"
+                                        class="btn btn-primary btn-lg m-l-15 waves-effect"  ng-disabled="campanhaFiltroForm.$invalid">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Tabela-->
+                <div class="body table-responsive">
+                    <table class="table table-striped table-condensed table-hover">
+                        <thead>
+                        <tr>
+                            <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('descricao')" style="text-align: center">DESCRIÇÃO
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('dataInicio')" style="text-align: center">DATA INICIO
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataInicio'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('dataFim')" style="text-align: center">DATA FIM
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataFim'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th class="col-sm-1" style="text-align: center">#</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr dir-paginate="campanha in campanhas | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td style="text-align: center">{{campanha.id}}</td>
+                            <td style="text-align: center">{{campanha.descricao}}</td>
+                            <td style="text-align: center">{{campanha.dataInicio | date:'dd/MM/yyyy'}}</td>
+                            <td style="text-align: center">{{campanha.dataFim | date:'dd/MM/yyyy'}}</td>
+                            <td style="text-align: center">
+                                <i ng-click="selecionaCampanha(campanha)" class="material-icons"
+                                   title="Selecionar" data-dismiss="modal">done</i>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">FECHAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ModalContribuinte -->
+<div class="modal fade" id="modalContribuinte" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="contribuinteModalLabel">Buscar contribuinte</h4>
+            </div>
+            <div class="modal-body">
+                <!--Filtros-->
+                <div class="body">
+                    <form id="contribuinteFiltroForm">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" ng-model="contribuinteBusca" class="form-control" placeholder="Nome" ng-required="true" ng-minlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                <button id="nomeContribuinteBusca" ng-click="buscarContribuinte()" type="button"
+                                        class="btn btn-primary btn-lg m-l-15 waves-effect"  ng-disabled="campanhaFiltroForm.$invalid">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Tabela-->
+                <table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('nome')" style="text-align: center">NOME
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='nome'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('sobrenome')" style="text-align: center">SOBRENOME
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='sobrenome'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('email')" style="text-align: center">EMAIL
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th ng-click="sort('cep')" style="text-align: center">CEP
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='cep'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th class="col-sm-1" style="text-align: center">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="contribuinte in contribuintes | orderBy:sortKey:reverse | itemsPerPage:5">
+                        <td style="text-align: center">{{contribuinte.id}}</td>
+                        <td style="text-align: center">{{contribuinte.nome}}</td>
+                        <td style="text-align: center">{{contribuinte.sobrenome}}</td>
+                        <td style="text-align: center">{{contribuinte.email}}</td>
+                        <td style="text-align: center">{{contribuinte.cep.cep}}</td>
+                        <td style="text-align: center">
+                            <i ng-click="selecionaContribuinte(contribuinte)" class="material-icons"
+                               title="Selecionar" data-dismiss="modal">done</i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true" >
+                </dir-pagination-controls>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">FECHAR</button>
             </div>
         </div>
     </div>

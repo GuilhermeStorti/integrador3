@@ -42,6 +42,18 @@ public class ContribuinteController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/findByNome/{nome}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<?> findByNome(@PathVariable("nome") String nome) {
+        List<Contribuinte> contribuintes = this.service.findByNome(nome);
+        List<ContribuinteRepresentation> representations = new ArrayList<>();
+        for(Contribuinte c : contribuintes){
+            representations.add(new ContribuinteRepresentation(c));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(representations);
+    }
+
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<?> findById(@PathVariable("id") Integer id) {

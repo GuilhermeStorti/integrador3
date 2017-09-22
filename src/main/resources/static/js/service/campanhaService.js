@@ -3,6 +3,10 @@ angular.module("app").factory("campanhaService", function ($http, defaultUrl) {
         return $http.get(defaultUrl.getServerUrl() + "/campanha");
     };
 
+    var _findByDescricao = function (descricao) {
+        return $http.get(defaultUrl.getServerUrl() + "/campanha/filtroDescricao/" + descricao);
+    };
+
     var _saveCampanha = function (campanha) {
         return $http.post(defaultUrl.getServerUrl() + "/campanha", campanha);
     };
@@ -14,6 +18,7 @@ angular.module("app").factory("campanhaService", function ($http, defaultUrl) {
     return {
         getCampanhas: _getCampanhas,
         saveCampanha: _saveCampanha,
-        updateCampanha: _updateCampanha
+        updateCampanha: _updateCampanha,
+        findByDescricao: _findByDescricao
     };
 });
