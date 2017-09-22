@@ -16,13 +16,9 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
     };
 
     var parse = function (){
-        $scope.doacao.campanha = JSON.parse($scope.doacao.campanha);
-        $scope.doacao.funcionarioMotoboy = JSON.parse($scope.doacao.funcionarioMotoboy);
-        $scope.doacao.contribuinte = JSON.parse($scope.doacao.contribuinte);
         $scope.doacao.formaPagamento = JSON.parse($scope.doacao.formaPagamento);
         $scope.doacao.campanha.dataInicio = dateUtils.timestampToDate($scope.doacao.campanha.dataInicio);
         $scope.doacao.campanha.dataFim = dateUtils.timestampToDate($scope.doacao.campanha.dataFim);
-        /*$scope.doacao.dataOperacao = dateUtils.timestampToDate($scope.doacao.dataOperacao);*/
     };
 
     var mostrar = function()	{
@@ -70,6 +66,10 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
 
     $scope.limpar = function () {
         $scope.doacao = {};
+        $scope.campanhas = {};
+        $scope.contribuintes = {};
+        $scope.contribuinteBusca = "";
+        $scope.campanhaBusca = "";
     };
 
     $scope.changeToEdit = function () {
@@ -93,6 +93,8 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
         $scope.limpar();
         $scope.motoboyNome = funcionarioMotoboy.nome + " " + funcionarioMotoboy.sobrenome;
         $scope.doacao.funcionarioMotoboy = funcionarioMotoboy;
+        $scope.doacao.parcela = 1;
+        $scope.doacao.formaPagamento = $scope.formaPagamentos[0];
         $scope.cadastro = true;
         $scope.listagem = false;
         $scope.edicao = false;

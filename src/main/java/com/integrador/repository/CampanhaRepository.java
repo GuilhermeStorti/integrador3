@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CampanhaRepository extends JpaRepository<Campanha, Integer> {
 
-    @Query("select c from Campanha c where c.descricao like %:descricao%")
+    @Query("select c from Campanha c where upper(c.descricao) like %:descricao%")
     List<Campanha> findByDescricao(@Param("descricao") String descricao);
 
 }

@@ -45,7 +45,7 @@ public class ContribuinteController {
     @RequestMapping(value = "/findByNome/{nome}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<?> findByNome(@PathVariable("nome") String nome) {
-        List<Contribuinte> contribuintes = this.service.findByNome(nome);
+        List<Contribuinte> contribuintes = this.service.findByNome(nome.toUpperCase());
         List<ContribuinteRepresentation> representations = new ArrayList<>();
         for(Contribuinte c : contribuintes){
             representations.add(new ContribuinteRepresentation(c));

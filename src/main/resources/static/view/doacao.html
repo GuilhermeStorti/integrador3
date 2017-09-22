@@ -80,21 +80,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="row clearfix">
-                        <div class="col-sm-4">
-                            <label for="repeatContribuinte">Contribuinte</label>
-                            <select class="form-control show-tick" name="repeatContribuinte" id="repeatContribuinte" ng-model="doacao.contribuinte">
-                                <option ng-repeat="contribuinte in contribuintes" value="{{contribuinte}}">
-                                    {{contribuinte.nome}} {{contribuinte.sobrenome}}</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="repeatFuncionario">Funcionario</label>
-                            <select class="form-control show-tick" name="repeatFuncionario" id="repeatFuncionario" ng-model="doacao.funcionarioMotoboy">
-                                <option ng-repeat="funcionario in funcionarios" value="{{funcionario}}">{{funcionario.nome}}</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="row clearfix">
                         <div class="col-sm-4">
                             <label for="valor">Valor R$</label>
@@ -109,22 +94,24 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label for="repeatFuncionario">Forma de pagamento</label>
+                            <label for="repeatPagamento">Forma de pagamento</label>
                             <select class="form-control show-tick" name="repeatPagamento" id="repeatPagamento" ng-model="doacao.formaPagamento">
                                 <option ng-repeat="pagamento in formaPagamentos" value="{{pagamento}}">{{pagamento.descricao}}</option>
                             </select>
                         </div>
-                        <div class="col-sm-4">
-                            <label for="repeatParcela">Quantidade de parcelas</label>
-                            <select class="form-control show-tick" name="repeatParcela" id="repeatParcela" ng-model="doacao.parcela">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                            </select>
+                        <div class="col-sm-3" ng-required="true">
+                            <label>Quantidade de parcelas</label>
+                            <div class="form-group">
+                                <input type="radio" name="quantidadeParcelas" id="1" value="1" class="with-gap" ng-model="doacao.parcela">
+                                <label for="1">1</label>
+                                <input type="radio" name="quantidadeParcelas" id="2" value="2" class="with-gap" ng-model="doacao.parcela">
+                                <label for="2">2</label>
+                                <input type="radio" name="quantidadeParcelas" id="4" value="4" class="with-gap" ng-model="doacao.parcela">
+                                <label for="4">4</label>
+                            </div>
                         </div>
                     </div>
                 </form>
--->
                 <button data-ng-click="salvar()" type="button" ng-disabled="cadastroForm.$invalid"
                         class="btn btn-primary m-t-15 waves-effect" ng-if="cadastro">CADASTRAR</button>
 
@@ -193,18 +180,20 @@
             <div class="modal-body">
                 <!--Filtros-->
                 <div class="body">
-                    <form id="campanhaFiltroForm">
+                    <form name="campanhaFiltroForm">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" ng-model="campanhaBusca" class="form-control" placeholder="Descrição" ng-required="true" ng-minlength="3">
+                                        <input type="text" ng-model="campanhaBusca" class="form-control" placeholder="Descrição"
+                                               ng-required="true" ng-minlength="2">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
                                 <button id="descricaoBusca" ng-click="buscarCampanha()" type="button"
-                                        class="btn btn-primary btn-lg m-l-15 waves-effect"  ng-disabled="campanhaFiltroForm.$invalid">Buscar</button>
+                                        class="btn btn-primary btn-lg m-l-15 waves-effect"
+                                        ng-disabled="campanhaFiltroForm.$invalid">Buscar</button>
                             </div>
                         </div>
                     </form>
@@ -216,16 +205,20 @@
                         <thead>
                         <tr>
                             <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
-                                <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='id'"
+                                      ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('descricao')" style="text-align: center">DESCRIÇÃO
-                                <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='descricao'"
+                                      ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('dataInicio')" style="text-align: center">DATA INICIO
-                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataInicio'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataInicio'"
+                                      ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('dataFim')" style="text-align: center">DATA FIM
-                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataFim'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='dataFim'"
+                                      ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th class="col-sm-1" style="text-align: center">#</th>
                         </tr>
@@ -268,7 +261,7 @@
             <div class="modal-body">
                 <!--Filtros-->
                 <div class="body">
-                    <form id="contribuinteFiltroForm">
+                    <form name="contribuinteFiltroForm">
                         <div class="row clearfix">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
                                 <div class="form-group">

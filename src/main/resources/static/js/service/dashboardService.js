@@ -7,8 +7,13 @@ angular.module("app").factory("dashboardService", function ($http, defaultUrl) {
         return $http.get(defaultUrl.getServerUrl() + "/dashboard/taxpayersSavesOfMounth");
     };
 
+    var _findValueOfDonationsOfMounth = function () {
+        return $http.get(defaultUrl.getServerUrl() + "/dashboard/findValueOfDonationsOfMounth");
+    };
+
     return {
         getDonationsOfMounth: _getDonationsOfMounth,
-        getTaxpayersSavesOfMounth: _getTaxpayersSavesOfMounth
+        getTaxpayersSavesOfMounth: _getTaxpayersSavesOfMounth,
+        findValueOfDonationsOfMounth: _findValueOfDonationsOfMounth
     };
 });

@@ -16,8 +16,11 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
     @Query("select count(d) from Doacao d where d.dataOperacao > :primeiroDia")
     int findDonationsOfMounth(@Param("primeiroDia") Date primeiroDia);
 
-    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.dataOperacao = :primeiroDia and d.status = 'B'")
+    /*@Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.dataOperacao = :primeiroDia and d.status = 'B'")
     Double findValueOfDonationsOfMounth(@Param("primeiroDia") Date primeiroDia,
-                                        @Param("atendente")Funcionario atendente);
+                                        @Param("atendente")Funcionario atendente);*/
+
+    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.status = 'G'")
+    Double findValueOfDonationsOfMounth(@Param("atendente")Funcionario atendente);
 
 }

@@ -41,6 +41,7 @@ public class DashboardController {
     @RequestMapping(method = RequestMethod.GET, value = "/findValueOfDonationsOfMounth")
     public ResponseEntity<?> findValueOfDonationsOfMounth(){
         Funcionario funcionario = new Funcionario();
+        funcionario.setId(2);
         return ResponseEntity.status(HttpStatus.OK).body(this.doacaoService.findValueOfDonationsOfMounth(funcionario));
     }
 

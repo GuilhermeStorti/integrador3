@@ -16,7 +16,7 @@ public interface ContribuinteRepository extends JpaRepository<Contribuinte, Inte
     @Query("select count(c) from Contribuinte c where c.dataCadastro > :primeiroDia")
     int findSavesOfMounth(@Param("primeiroDia") Date primeiroDia);
 
-    @Query("select c from Contribuinte c where c.nome like %:nome%")
+    @Query("select c from Contribuinte c where upper(c.nome) like %:nome%")
     List<Contribuinte> findByNome(@Param("nome") String nome);
 
 }

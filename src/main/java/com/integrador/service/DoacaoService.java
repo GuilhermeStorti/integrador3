@@ -75,7 +75,7 @@ public class DoacaoService {
     }
 
     public Double findValueOfDonationsOfMounth(Funcionario funcionario){
-        return repository.findValueOfDonationsOfMounth(DateUtils.asDate(LocalDate.now().withDayOfMonth(1)), funcionario);
+        return repository.findValueOfDonationsOfMounth(funcionario);
     }
 
     private boolean exist( Integer id ) {
