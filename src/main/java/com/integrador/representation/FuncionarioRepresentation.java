@@ -1,5 +1,6 @@
 package com.integrador.representation;
 
+import com.integrador.domain.Cargo;
 import com.integrador.domain.Funcionario;
 
 /**
@@ -18,14 +19,14 @@ public class FuncionarioRepresentation {
     private Integer numeroResidencia;
     private String complementoResidencia;
     private String situacao;
-    private CargoRepresentation cargo;
+    private Cargo cargo;
     private EnderecoRepresentation endereco;
     private UsuarioRepresentation usuario;
 
     public FuncionarioRepresentation() {
     }
 
-    public FuncionarioRepresentation(int id, String nome, String sobrenome, String sexo, String cpf, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao, CargoRepresentation cargo, EnderecoRepresentation endereco, UsuarioRepresentation usuario) {
+    public FuncionarioRepresentation(int id, String nome, String sobrenome, String sexo, String cpf, String email, String telefone1, String telefone2, Integer numeroResidencia, String complementoResidencia, String situacao, Cargo cargo, EnderecoRepresentation endereco, UsuarioRepresentation usuario) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -54,7 +55,6 @@ public class FuncionarioRepresentation {
         this.numeroResidencia = f.getNumeroResidencia();
         this.complementoResidencia = f.getComplementoResidencia();
         this.situacao = f.getSituacao();
-        this.cargo = new CargoRepresentation(f.getCargo());
         this.endereco = new EnderecoRepresentation(f.getEndereco());
         this.usuario = new UsuarioRepresentation(f.getUsuario());
     }
@@ -73,7 +73,7 @@ public class FuncionarioRepresentation {
         f.setNumeroResidencia(r.getNumeroResidencia());
         f.setComplementoResidencia(r.getComplementoResidencia());
         f.setSituacao(r.getSituacao());
-        f.setCargo(new CargoRepresentation().build(r.getCargo()));
+
         f.setEndereco(new EnderecoRepresentation().build(r.getEndereco()));
         f.setUsuario(new UsuarioRepresentation().build(r.getUsuario()));
 
@@ -168,11 +168,11 @@ public class FuncionarioRepresentation {
         this.situacao = situacao;
     }
 
-    public CargoRepresentation getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(CargoRepresentation cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 

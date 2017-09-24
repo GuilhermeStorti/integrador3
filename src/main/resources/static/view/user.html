@@ -1,0 +1,37 @@
+<div>
+
+    <h2> Dados de Usuário </h2>
+
+</div>
+
+<div>
+    <div class="row clearfix">
+        <div class="col-sm-4">
+            <label for="usuario">Usuario</label>
+            <div class="form-group">
+                <div class="form-line">
+                    <input type="text" id="usuario" class="form-control" ng-required="true" ng-minlength="5"
+                           ng-model="usuario.usuario" placeholder="Entre com o usuario.">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label for="senha">Senha</label>
+            <div class="form-group">
+                <div class="form-line">
+                    <input type="password" id="senha" class="form-control" ng-required="true" ng-minlength="5"
+                           ng-model="usuario.senha" placeholder="Entre com a senha.">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label for="confirmacaoSenha">Confirmação de senha</label>
+            <div class="form-group">
+                <div class="form-line">
+                    <input type="password" id="confirmacaoSenha" class="form-control" ng-required="true" ng-minlength="5"
+                           ng-model="confirmacaoSenha" placeholder="Repita a senha.">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
