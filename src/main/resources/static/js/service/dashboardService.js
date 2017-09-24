@@ -11,9 +11,15 @@ angular.module("app").factory("dashboardService", function ($http, defaultUrl) {
         return $http.get(defaultUrl.getServerUrl() + "/dashboard/findValueOfDonationsOfMounth");
     };
 
+    var _findNumbersOfDonationsGroupByStatus = function () {
+        return $http.get(defaultUrl.getServerUrl() + "/dashboard/findNumbersOfDonationsGroupByStatus");
+    };
+
     return {
         getDonationsOfMounth: _getDonationsOfMounth,
         getTaxpayersSavesOfMounth: _getTaxpayersSavesOfMounth,
-        findValueOfDonationsOfMounth: _findValueOfDonationsOfMounth
+        findValueOfDonationsOfMounth: _findValueOfDonationsOfMounth,
+        findNumbersOfDonationsGroupByStatus: _findNumbersOfDonationsGroupByStatus
     };
+
 });

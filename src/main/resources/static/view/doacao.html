@@ -95,9 +95,13 @@
                         </div>
                         <div class="col-sm-4">
                             <label for="repeatPagamento">Forma de pagamento</label>
-                            <select class="form-control show-tick" name="repeatPagamento" id="repeatPagamento" ng-model="doacao.formaPagamento">
-                                <option ng-repeat="pagamento in formaPagamentos" value="{{pagamento}}">{{pagamento.descricao}}</option>
-                            </select>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="repeatPagamento" id="repeatPagamento" ng-model="doacao.formaPagamento">
+                                        <option ng-repeat="pagamento in formaPagamentos" value="{{pagamento}}">{{pagamento.descricao}}</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-3" ng-required="true">
                             <label>Quantidade de parcelas</label>
@@ -144,6 +148,9 @@
                         <th ng-click="sort('valor')" style="text-align: center">VALOR
                             <span class="glyphicon sort-icon" ng-show="sortKey=='valor'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
+                        <th ng-click="sort('status')" style="text-align: center">STATUS
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='status'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
                         <th class="col-sm-1" style="text-align: center">#</th>
                     </tr>
                     </thead>
@@ -153,6 +160,7 @@
                         <td style="text-align: center">{{doacao.contribuinte.nome + " " +doacao.contribuinte.sobrenome}}</td>
                         <td style="text-align: center">{{doacao.dataOperacao | date:'dd/MM/yyyy'}}</td>
                         <td style="text-align: center">{{doacao.valor  | currency}}</td>
+                        <td style="text-align: center"><span ng-class="whatClassIsIt(doacao.status)">{{converteStatus(doacao.status)}}</span></td>
                         <td style="text-align: center">
                             <i ng-click="seleciona(doacao)"class="material-icons" title="Editar">mode_edit</i>
                         </td>

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by guilhermeplasma on 19/08/17.
@@ -25,5 +26,8 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
 
     @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.status = 'B'")
     Double findValueOfDonationsBaixadas(@Param("atendente")Funcionario atendente);
+
+    @Query("select count(d) from Doacao d group by d.status order by d.status")
+    List<Integer> findNumbersOfDonationsGroupByStatus();
 
 }

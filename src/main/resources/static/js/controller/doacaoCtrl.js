@@ -123,6 +123,28 @@ angular.module("app").controller("doacaoCtrl", function ($scope, doacaoService, 
         });
     };
 
+    $scope.whatClassIsIt= function(valor){
+        if(valor === "B")
+            return "label bg-green";
+        else if(valor === "G")
+            return "label bg-blue";
+        else if(valor === "R")
+            return "label bg-orange";
+        else
+            return "label bg-red";
+    };
+
+    $scope.converteStatus = function (status) {
+        if(status === "B")
+            return "BAIXADO";
+        else if(status === "G")
+            return "GERADO";
+        else if(status === "R")
+            return "REAGENDADO";
+        else
+            return "CANCELADO";
+    };
+
     $scope.changeToList();
     carregarListas();
 

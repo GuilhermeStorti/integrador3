@@ -82,6 +82,10 @@ public class DoacaoService {
         return repository.findValueOfDonationsBaixadas(funcionario);
     }
 
+    public List<Integer> findNumbersOfDonationsGroupByStatus(){
+        return repository.findNumbersOfDonationsGroupByStatus();
+    }
+
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
     }

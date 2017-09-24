@@ -45,4 +45,10 @@ public class DashboardController {
         return ResponseEntity.status(HttpStatus.OK).body(this.doacaoService.findValueOfDonationsOfMounth(funcionario));
     }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/findNumbersOfDonationsGroupByStatus")
+    public ResponseEntity<?> findNumbersOfDonationsGroupByStatus(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.doacaoService.findNumbersOfDonationsGroupByStatus());
+    }
+
 }

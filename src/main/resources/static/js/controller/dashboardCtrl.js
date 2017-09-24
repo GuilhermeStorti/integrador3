@@ -24,9 +24,21 @@ angular.module("app").controller("dashboardCtrl", function ($scope, dashboardSer
         });
     };
 
+    var findNumbersOfDonationsGroupByStatus= function () {
+        dashboardService.findNumbersOfDonationsGroupByStatus().success(function (data) {
+            $scope.numbersOfDonationsGroupByStatus = data;
+        }) .error(function (data, status) {
+            alert("ops!! erro na chamada findNumbersOfDonationsGroupByStatus");
+        });
+    };
+
+
     mostrarTaxpayersSavesOfMounth();
     mostrarDonationsOfMounth();
     findValueOfDonationsOfMounth();
+    findNumbersOfDonationsGroupByStatus();
+
+    console.log($scope.numbersOfDonationsGroupByStatus);
 
     $scope.colors = [
         '#8BC34A',
@@ -40,6 +52,11 @@ angular.module("app").controller("dashboardCtrl", function ($scope, dashboardSer
         [28, 48, -40, 19, 86, 27, 90],
         [30, 70, -20, 10, 56, 17, 50]
     ];
+
+    $scope.dadosPizza = [1, 1, 4, 1];
+    $scope.labelsPizza = ["Baixados", "Cancelados", "Gerados", "Reagendados"];
+    $scope.colorsPizza = ["#4CAF50", "#F44336", "#2196F3", "#FF9800"];
+
     $scope.datasetOverride = [
         {
             label: "Bar chart",
