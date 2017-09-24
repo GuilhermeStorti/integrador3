@@ -20,7 +20,10 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
     Double findValueOfDonationsOfMounth(@Param("primeiroDia") Date primeiroDia,
                                         @Param("atendente")Funcionario atendente);*/
 
-    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.status = 'G'")
+    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.status != 'C'")
     Double findValueOfDonationsOfMounth(@Param("atendente")Funcionario atendente);
+
+    @Query("select sum(d.valor) from Doacao d where d.funcionarioAtendente = :atendente and d.status = 'B'")
+    Double findValueOfDonationsBaixadas(@Param("atendente")Funcionario atendente);
 
 }

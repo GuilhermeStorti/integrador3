@@ -78,6 +78,10 @@ public class DoacaoService {
         return repository.findValueOfDonationsOfMounth(funcionario);
     }
 
+    public Double findValueOfDonationsBaixadas(Funcionario funcionario){
+        return repository.findValueOfDonationsBaixadas(funcionario);
+    }
+
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
     }

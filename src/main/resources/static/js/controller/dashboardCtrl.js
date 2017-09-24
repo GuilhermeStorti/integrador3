@@ -28,12 +28,17 @@ angular.module("app").controller("dashboardCtrl", function ($scope, dashboardSer
     mostrarDonationsOfMounth();
     findValueOfDonationsOfMounth();
 
-    $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
+    $scope.colors = [
+        '#8BC34A',
+        '#FF9800',
+        '#9E9E9E'
+    ];
 
-    $scope.labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    $scope.labels = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
     $scope.data = [
         [65, -59, 80, 81, -56, 55, -40],
-        [28, 48, -40, 19, 86, 27, 90]
+        [28, 48, -40, 19, 86, 27, 90],
+        [30, 70, -20, 10, 56, 17, 50]
     ];
     $scope.datasetOverride = [
         {
