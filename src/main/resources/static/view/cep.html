@@ -12,13 +12,14 @@
                 <button type="button" data-ng-click="buscarCep()" class="btn bg-green btn-block waves-effect">BUSCAR</button>
             </div>
         </div>
+    <div ng-show="address.logradouro != undefined">
         <div class="row clearfix">
             <div class="col-sm-6">
                 <label for="logradouro">Logradouro</label>
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="logradouro" class="form-control" ng-required="true"
-                               ng-model="address.logradouro" placeholder="Logradouro">
+                               ng-model="address.logradouro" placeholder="Logradouro"  ng-disabled="true" >
                     </div>
                 </div>
             </div>
@@ -27,7 +28,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="bairro" class="form-control" ng-required="true"
-                               ng-model="address.bairro" placeholder="Bairro">
+                               ng-model="address.bairro" placeholder="Bairro"  ng-disabled="true">
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="cidade" class="form-control" ng-required="true"
-                               ng-model="address.cidade" placeholder="Cidade">
+                               ng-model="address.cidade" placeholder="Cidade"  ng-disabled="true">
 
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="uf" class="form-control" ng-required="true"
-                               ng-model="address.uf" placeholder="UF">
+                               ng-model="address.uf" placeholder="UF"  ng-disabled="true">
                     </div>
                 </div>
             </div>
@@ -55,7 +56,7 @@
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="numero" class="form-control" ng-required="true"
-                               ng-model="address.numero" placeholder="Nº">
+                               ng-model="funcionarios.numeroResidencia" placeholder="Nº" >
                     </div>
                 </div>
             </div>
@@ -64,9 +65,10 @@
                 <div class="form-group">
                     <div class="form-line">
                         <input type="text" id="complemento" class="form-control" ng-required="true"
-                               ng-model="address.complemento" placeholder="Complemento">
+                               ng-model="funcionarios.complementoResidencia" placeholder="Complemento">
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 </div>
