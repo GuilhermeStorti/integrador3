@@ -148,22 +148,31 @@
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th class="col-sm-1" style="text-align: center">ID
+                        <th ng-click="sort('id')" class="col-sm-1" style="text-align: center">ID
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th style="text-align: center">NOME
+                        <th ng-click="sort('nome')" style="text-align: center">NOME
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='nome'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th style="text-align: center">SEXO
+                        <th ng-click="sort('sexo')" style="text-align: center">SEXO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='sexo'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th  style="text-align: center">CELULAR
+                        <th ng-click="sort('celular')" style="text-align: center">CELULAR
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='celular'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th style="text-align: center">SITUAÇÃO
+                        <th ng-click="sort('situacao')" style="text-align: center">SITUAÇÂO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='situacao'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                         </th>
-                        <th style="text-align: center">CARGO
+                        <th ng-click="sort('cargo')" style="text-align: center">CARGO
+                            <span class="glyphicon sort-icon" ng-show="sortKey=='cargo'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                        </th>
+                        <th class="col-sm-1" style="text-align: center">
+                            #
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat= "funcionario in funcionarios">
+                    <tr dir-paginate="funcionario in funcionarios | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
                         <td style="text-align: center">{{funcionario.id}}</td>
                         <td style="text-align: center">{{funcionario.nome}}</td>
                         <td style="text-align: center">{{funcionario.sexo}}</td>
@@ -177,6 +186,12 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <dir-pagination-controls
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true" >
+                </dir-pagination-controls>
             </div>
         </div>
     </div>
