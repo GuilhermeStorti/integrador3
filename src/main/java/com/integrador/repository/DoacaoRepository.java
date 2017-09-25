@@ -28,6 +28,6 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
     Double findValueOfDonationsBaixadas(@Param("atendente")Funcionario atendente);
 
     @Query("select count(d) from Doacao d group by d.status order by d.status")
-    List<Integer> findNumbersOfDonationsGroupByStatus();
+    List<Long> findNumbersOfDonationsGroupByStatus();
 
 }

@@ -82,7 +82,7 @@ public class DoacaoService {
         return repository.findValueOfDonationsBaixadas(funcionario);
     }
 
-    public List<Integer> findNumbersOfDonationsGroupByStatus(){
+    public List<Long> findNumbersOfDonationsGroupByStatus(){
         return repository.findNumbersOfDonationsGroupByStatus();
     }
 

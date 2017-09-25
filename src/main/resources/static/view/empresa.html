@@ -54,7 +54,7 @@
                             <label for="email">E-mail</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="email" class="form-control" ng-required="true" ng-minlength="5"
+                                    <input type="email" id="email" class="form-control" ng-required="true" ng-minlength="5"
                                            ng-model="empresa.email" placeholder="E-mail">
                                 </div>
                             </div>
@@ -65,8 +65,8 @@
                             <label for="cnpj">CNPJ</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="cnpj" class="form-control" ng-required="true" ng-minlength="5"
-                                           ng-model="empresa.cnpj" placeholder="CNPJ">
+                                    <input type="text" id="cnpj" class="form-control" ui-mask="99.999.999/9999-99" ng-required="true" ng-minlength="5"
+                                           ng-model="empresa.cnpj">
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <label for="telefone">Telefone</label>
                             <div class="input-group">
                                 <div class="form-line">
-                                    <input id="telefone" type="text" class="form-control mobile-phone-number" placeholder="(00) 0000-0000" ng-model="empresa.telefone1">
+                                    <input id="telefone" type="text" class="form-control mobile-phone-number" ui-mask="(99) 9999-9999" ng-model="empresa.telefone1">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <label for="celular">Celular</label>
                             <div class="input-group">
                                 <div class="form-line">
-                                    <input id="celular" type="text" class="form-control mobile-phone-number" placeholder="(00) 9 0000-0000" ng-model="empresa.telefone2">
+                                    <input id="celular" type="text" class="form-control mobile-phone-number" ui-mask="(99) 99999-9999" ng-model="empresa.telefone2">
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by guilhermeplasma on 12/09/17.
  */
@@ -48,7 +50,12 @@ public class DashboardController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/findNumbersOfDonationsGroupByStatus")
     public ResponseEntity<?> findNumbersOfDonationsGroupByStatus(){
-        return ResponseEntity.status(HttpStatus.OK).body(this.doacaoService.findNumbersOfDonationsGroupByStatus());
+        List<Long> lista = this.doacaoService.findNumbersOfDonationsGroupByStatus();
+        Long[] response = new Long[lista.size()];
+        for(int i = 0; i < lista.size(); i++){
+            response[i] = lista.get(i);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }
