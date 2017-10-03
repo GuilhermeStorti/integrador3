@@ -1,0 +1,50 @@
+<groups xmlns="http://www.isdc.ro/wro">
+  <group name="angular-bootstrap">
+
+    <css>file:@project.basedir@/src/main/wro/main.less</css>
+
+    <!-- Google Fonts -->
+    <css>"https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext</css>
+    <css>https://fonts.googleapis.com/icon?family=Material+Icons</css>
+
+    <!-- Bootstrap Core Css -->
+    <css>file:@project.basedir@/src/main/resources/static/plugins/bootstrap-3.3.7/css/bootstrap.css</css>
+
+    <!-- Bootstrap Select Css -->
+    <css>file:@project.basedir@/src/main/resources/static/plugins/bootstrap-3.3.7/css/bootstrap.css</css>
+
+    <!-- Animation Css -->
+    <css>file:@project.basedir@/src/main/resources/static/plugins/animate-css/animate.css</css>
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <css>file:@project.basedir@/src/main/resources/static/css/themes/all-themes.css</css>
+
+    <!-- Custom Css -->
+    <css>file:@project.basedir@/src/main/resources/static/css/style.css</css>
+
+    <!--Libs-->
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/angular1-5.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/angular-route.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/dirPagination.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/angular-locale_pt-br.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/Chart.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/angular-chart.js</js>
+    <js>file:@project.basedir@/src/main/resources/static/js/lib/mask.js</js>
+
+    <!-- Jquery Core Js -->
+    <js>file:@project.basedir@/src/main/resources/static/plugins/jquery/jquery.min.js</js>
+
+    <!-- Bootstrap Core Js -->
+    <js>file:@project.basedir@/src/main/resources/static/plugins/bootstrap-3.3.7/js/bootstrap.js</js>
+
+    <!-- Select Plugin Js -->
+    <js>file:@project.basedir@/src/main/resources/static/plugins/bootstrap-select/js/bootstrap-select.js</js>
+
+    <!-- Slimscroll Plugin Js -->
+    <js>file:@project.basedir@/src/main/resources/static/plugins/jquery-slimscroll/jquery.slimscroll.js</js>
+
+    <!-- Waves Effect Plugin Js -->
+    <js>file:@project.basedir@/src/main/resources/static/plugins/node-waves/waves.js</js>
+
+   </group>
+</groups>
