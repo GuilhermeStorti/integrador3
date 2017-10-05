@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <meta charset="UTF-8">
@@ -25,6 +25,16 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/meuStyle.css" rel="stylesheet">
     <script src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+
+    <!--Libs-->
+    <script src="js/lib/angular1-5.js"></script>
+    <script src="js/lib/angular-route.js"></script>
+
+    <!--App-->
+    <script src="js/app.js"></script>
+
+    <!--Controller-->
+    <script src="js/controller/loginCtrl.js"></script>
 </head>
 
 <body class="login-page grad" >
@@ -33,15 +43,16 @@
             <a href="javascript:void(0);">STRONG<b>ACTION</b></a>
         </div>
         <div class="card">
-            <div class="body">
-                <form id="sign_in" method="POST">
+            <div class="body" ng-controller="">
+                <form id="sign_in" ng-submit="controller.login()">
                     <div class="msg">Entre no sistema</div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Usuario" required autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="Usuario" required autofocus
+                                   ng-model="controller.credentials.username">
                         </div>
                     </div>
                     <div class="input-group">
@@ -49,16 +60,17 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Senha" required>
+                            <input type="password" class="form-control" name="password" placeholder="Senha" required
+                                   ng-model="controller.credentials.password">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-yellow">
                             <label for="rememberme">Mantenha-me conectado</label>
                         </div>
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-pink waves-effect" type="submit">Entrar</button>
+                            <button class="btn btn-block bg-yellow waves-effect" type="submit">Entrar</button>
                         </div>
                     </div>
                     <!--<div class="row m-t-15 m-b&#45;&#45;20">
@@ -75,13 +87,10 @@
     </div>
 
     <!-- Jquery Core Js -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/jquery/jquery.js"></script>
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
-
-    <!-- Waves Effect Plugin Js -->
-    <script src="plugins/node-waves/waves.js"></script>
 
 </body>
 

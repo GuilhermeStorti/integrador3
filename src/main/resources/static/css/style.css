@@ -1931,11 +1931,11 @@
     color: #fff !important; }
 
 .bg-yellow {
-  background-color: #ffe821 !important;
-  color: #fff; }
+  background-color: #FFEB3B !important;
+  color: #515151 !important; }
   .bg-yellow .content .text,
   .bg-yellow .content .number {
-    color: #fff !important; }
+    color: #515151 !important; }
 
 .bg-amber {
   background-color: #FFC107 !important;
@@ -2871,7 +2871,7 @@ section.content {
   .card .bg-blue-grey,
   .card .bg-black {
     border-bottom: none !important;
-    color: #fff !important; }
+    color: #fff; }
     .card .bg-red h2, .card .bg-red small, .card .bg-red .material-icons,
     .card .bg-pink h2,
     .card .bg-pink small,
@@ -2930,7 +2930,7 @@ section.content {
     .card .bg-black h2,
     .card .bg-black small,
     .card .bg-black .material-icons {
-      color: #fff !important; }
+      color: #fff; }
     .card .bg-red .badge,
     .card .bg-pink .badge,
     .card .bg-purple .badge,
