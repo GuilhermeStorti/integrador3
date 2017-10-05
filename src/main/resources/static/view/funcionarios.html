@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="nome" class="form-control" ng-required="true" ng-minlength="5"
-                                           ng-model="funcionarios.nome" placeholder="Entre com o nome do funcionario.">
+                                           ng-model="funcionario.nome" placeholder="Entre com o nome do funcionario.">
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="sobrenome" class="form-control" ng-required="true" ng-minlength="5"
-                                           ng-model="funcionarios.sobrenome" placeholder="Sobrenome">
+                                           ng-model="funcionario.sobrenome" placeholder="Sobrenome">
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             <label for="email">Email</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="email" id="email" class="form-control"  ng-model="funcionarios.email" placeholder="Email do funcionario">
+                                    <input type="email" id="email" class="form-control"  ng-model="funcionario.email" placeholder="Email do funcionario">
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="input-group">
                                 <div class="form-line">
                                     <input type="text" class="form-control key" ui-mask="999.999.999-99"
-                                           ng-required="true" ng-minlength="5" ng-model="funcionarios.cpf">
+                                           ng-required="true" ng-minlength="5" ng-model="funcionario.cpf">
                                 </div>
                             </div>
                         </div>
@@ -74,8 +74,8 @@
                             <label for="cargos">Cargo</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" name="cargos" id="cargos" ng-model="funcionarios.cargo.id">
-                                        <option ng-repeat="cg in cargos" value="{{cg.id}}">{{cg.descricao}}</option>
+                                    <select class="form-control show-tick" name="cargos" id="cargos" ng-model="funcionario.cargo">
+                                        <option ng-repeat="cg in cargos" value="{{cg}}">{{cg.descricao}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,10 +83,10 @@
                         <div class="col-sm-4" ng-required="true">
                             <label for="M">Sexo</label>
                             <div class="form-group">
-                                <input type="radio" name="sex" id="M" class="with-gap" value="M" ng-model="funcionarios.sexo" required>
+                                <input type="radio" name="sex" id="M" class="with-gap" value="M" ng-model="funcionario.sexo" >
                                 <label for="M">Masculino</label>
 
-                                <input type="radio" name="sex" id="F" class="with-gap" value="F" ng-model="funcionarios.sexo" required>
+                                <input type="radio" name="sex" id="F" class="with-gap" value="F" ng-model="funcionario.sexo" >
                                 <label for="F" class="m-l-20">Feminino</label>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                             <div class="input-group">
                                 <div class="form-line">
                                     <input id="phone1" type="text" class="form-control mobile-phone-number" ui-mask="(99) 9999-9999"
-                                           ng-required="true" ng-minlength="5" ng-model="funcionarios.telefone1">
+                                           ng-required="true" ng-minlength="5" ng-model="funcionario.telefone1">
                                 </div>
                             </div>
                         </div>
@@ -108,17 +108,17 @@
                             <div class="input-group">
                                 <div class="form-line">
                                     <input id="phone2" type="text" class="form-control mobile-phone-number"
-                                           ng-required="true" ng-minlength="5" ui-mask="(99) 99999-9999"  ng-model="funcionarios.telefone2">
+                                           ng-required="true" ng-minlength="5" ui-mask="(99) 99999-9999"  ng-model="funcionario.telefone2">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4" ng-required="true">
                             <label for="M">Situação</label>
                             <div class="form-group">
-                                <input type="radio" name="situation" id="A" class="with-gap" value="A" ng-model="funcionarios.situacao" required>
+                                <input type="radio" name="situation" id="A" class="with-gap" value="A" ng-model="funcionario.situacao" >
                                 <label for="A">Ativo</label>
 
-                                <input type="radio" name="situation" id="I" class="with-gap" value="I" ng-model="funcionarios.situacao" required>
+                                <input type="radio" name="situation" id="I" class="with-gap" value="I" ng-model="funcionario.situacao" >
                                 <label for="I" class="m-l-20">Inativo</label>
                             </div>
                         </div>
