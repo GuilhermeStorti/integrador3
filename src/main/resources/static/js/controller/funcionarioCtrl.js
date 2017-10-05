@@ -2,7 +2,7 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
 
     $scope.address = {};
     $scope.usuario = {};
-    $scope.funcionario = {};
+    $scope.funcionario = {cargo: {}};
     $scope.sex = ["M","F"];
 
     var aux = {};
@@ -38,6 +38,7 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
 
     $scope.salvar = function()	{
         $scope.usuario.nome =  $scope.funcionario.nome;
+        $scope.funcionario.usuario =  $scope.usuario;
         funcionarioService.saveFuncionario($scope.funcionario).success(function (data) {
             $scope.limpar();
             mostrar();
