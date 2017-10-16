@@ -37,19 +37,15 @@ public class FuncionarioController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> listAll() {
         List<Funcionario> funcionarios = this.service.findAll();
-        List<FuncionarioRepresentation> representations = new ArrayList<>();
-        for(Funcionario f : funcionarios){
-            representations.add(new FuncionarioRepresentation(f));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(representations);
+
+        return ResponseEntity.ok().body(funcionarios);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<?> findById(@PathVariable("id") Integer id) {
-        FuncionarioRepresentation representation = new FuncionarioRepresentation(this.service.findById(id));
-        return ResponseEntity.status(HttpStatus.OK).body(representation);
+        return ResponseEntity.ok().body(this.service.findById(id));
     }
 
     @CrossOrigin
@@ -64,9 +60,12 @@ public class FuncionarioController {
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody FuncionarioRepresentation representation, @PathVariable("id") Integer id) {
-        this.service.update(new FuncionarioRepresentation().build(representation));
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Funcionario> update(@RequestBody Funcionario funcionario, @PathVariable("id") Integer id) {
+        funcionario.setEndereco(this.enderecoService.update(funcionario.getEndereco()));
+        funcionario.setCargo(this.cargoService.findById(funcionario.getCargo().getId()));
+        funcionario.setUsuario(this.usuarioService.findById(id));
+        this.service.update(funcionario);
+        return ResponseEntity.ok().body(funcionario);
     }
 
     @CrossOrigin

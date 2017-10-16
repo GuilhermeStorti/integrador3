@@ -1,5 +1,10 @@
 package com.integrador.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -56,6 +61,7 @@ public class Funcionario {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name="id_usuario"))
+    @JsonBackReference
     private Usuario usuario;
 
 

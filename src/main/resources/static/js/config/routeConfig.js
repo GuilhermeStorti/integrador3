@@ -40,5 +40,5 @@ angular.module("app").config(function ($routeProvider) {
         controller: "doacaoCtrl"
     });
 
-    $routeProvider.otherwise({redirectTo: "#"});
+    $routeProvider.otherwise({redirectTo: "/dashboard"});
 });

@@ -74,8 +74,9 @@
                             <label for="cargos">Cargo</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" name="cargos" id="cargos" ng-model="funcionario.cargo.id">
-                                        <option ng-repeat="cg in cargos" value="{{cg.id}}">{{cg.descricao}}</option>
+                                    <select class="form-control show-tick" name="cargos" id="cargos"
+                                            ng-model="funcionario.cargo.id">
+                                        <option ng-repeat="cg in cargos" ng-selected="cg.id == funcionario.cargo.id" value="{{cg.id}}" >{{cg.descricao}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,24 +109,27 @@
                             <div class="input-group">
                                 <div class="form-line">
                                     <input id="phone2" type="text" class="form-control mobile-phone-number"
-                                           ng-required="true" ng-minlength="5" ui-mask="(99) 99999-9999"  ng-model="funcionario.telefone2">
+                                           ng-required="true" ng-minlength="5" ui-mask="(99) 99999-9999"
+                                           ng-model="funcionario.telefone2">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4" ng-required="true">
                             <label for="M">Situação</label>
                             <div class="form-group">
-                                <input type="radio" name="situation" id="A" class="with-gap" value="A" ng-model="funcionario.situacao" >
+                                <input type="radio" name="situation" id="A" class="with-gap" value="A"
+                                       ng-model="funcionario.situacao" >
                                 <label for="A">Ativo</label>
 
-                                <input type="radio" name="situation" id="I" class="with-gap" value="I" ng-model="funcionario.situacao" >
+                                <input type="radio" name="situation" id="I" class="with-gap" value="I"
+                                       ng-model="funcionario.situacao" >
                                 <label for="I" class="m-l-20">Inativo</label>
                             </div>
                         </div>
 
                     </div>
                     <div ng-include="'view/cep.html'"></div>
-                    <div ng-include="'view/user.html'"></div>
+                    <div ng-if="!edicao" ng-include="'view/user.html'"></div>
                 </form>
 
                 <button data-ng-click="salvar()" type="button" ng-disabled="cadastroForm.$invalid"

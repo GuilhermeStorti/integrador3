@@ -2,7 +2,7 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
 
     $scope.address = {};
     $scope.usuario = {};
-    $scope.funcionario = {cargo: {}};
+    $scope.funcionario = {};
     $scope.sex = ["M","F"];
 
     var aux = {};
@@ -14,12 +14,9 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
         $scope.address.bairro = $scope.funcionario.endereco.bairro;
         $scope.address.cidade = $scope.funcionario.endereco.cidade;
         $scope.address.uf = $scope.funcionario.endereco.uf;
-        $scope.address.numero = $scope.funcionario.endereco.numeroResidencia;
-        $scope.address.complemento = $scope.funcionario.endereco.complementoResidencia;
-        $scope.usuario = $scope.funcionario.usuario;
-        $scope.confirmacaoSenha = $scope.funcionario.usuario.senha;
-
-
+        $scope.funcionarios.numeroResidencia = $scope.funcionario.numeroResidencia;
+        $scope.funcionarios.complementoResidencia = $scope.funcionario.complementoResidencia;
+        $scope.cargos.id = $scope.funcionario.cargo.id;
     }
     cargoService.getCargos().success(function (data) {
         $scope.cargos = data;
@@ -39,6 +36,8 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
     $scope.salvar = function()	{
         $scope.usuario.nome =  $scope.funcionario.nome;
         $scope.funcionario.usuario =  $scope.usuario;
+        $scope.funcionario.numeroResidencia = $scope.funcionarios.numeroResidencia;
+        $scope.funcionario.complementoResidencia = $scope.funcionarios.complementoResidencia;
         funcionarioService.saveFuncionario($scope.funcionario).success(function (data) {
             $scope.limpar();
             mostrar();
@@ -47,7 +46,9 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
     };
 
     $scope.editar = function(){
-        funcionarioService.updateFuncionario($scope.funcionarios).success(function (data) {
+        $scope.funcionario.numeroResidencia = $scope.funcionarios.numeroResidencia;
+        $scope.funcionario.complementoResidencia = $scope.funcionarios.complementoResidencia;
+        funcionarioService.updateFuncionario($scope.funcionario).success(function (data) {
             $scope.limpar();
             mostrar();
             $scope.changeToList();
@@ -68,9 +69,9 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
         $scope.address.bairro = aux.bairro;
         $scope.address.cidade = aux.localidade;
         $scope.address.uf = aux.uf;
-        $scope.address.numeroResidencia = aux.numero;
-        $scope.address.complementoResidencia = aux.complemento;
         $scope.funcionario.endereco = $scope.address;
+        $scope.funcionario.numeroResidencia = $scope.funcionarios.numeroResidencia;
+        $scope.funcionario.complementoResidencia = $scope.funcionarios.complementoResidencia;
     }
 
     $scope.seleciona = function(funcionario) {
@@ -81,6 +82,8 @@ angular.module("app").controller("funcionarioCtrl", function ($scope, funcionari
 
     $scope.limpar = function () {
         $scope.funcionario = {};
+        $scope.address = {};
+        $scope.usuario = {};
     };
 
     $scope.changeToEdit = function () {
