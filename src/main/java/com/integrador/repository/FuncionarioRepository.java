@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
 
-    @Query("select f from Funcionario f where f.cargo = 2")
+    @Query(value = "select * from funcionario f where f.id_cargo = 2 limit 1", nativeQuery = true)
     Funcionario findAtualMotoboy();
 
 }
