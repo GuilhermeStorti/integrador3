@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping(value = "/funcionario", consumes = "application/json")
 public class FuncionarioController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class FuncionarioController {
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody Funcionario funcionario) {
+    public ResponseEntity<Void> save( @RequestBody Funcionario funcionario) {
         funcionario.setEndereco(this.enderecoService.save(funcionario.getEndereco()));
         funcionario.setUsuario(this.usuarioService.save(funcionario.getUsuario()));
         funcionario.setCargo(this.cargoService.findById(funcionario.getCargo().getId()));

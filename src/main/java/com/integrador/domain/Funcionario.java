@@ -57,6 +57,7 @@ public class Funcionario {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "funcionario", targetEntity = Contribuinte.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference( value="contribuintes" )
     private List<Contribuinte> contribuintes;
 
     @OneToOne(fetch = FetchType.LAZY)
