@@ -1,5 +1,7 @@
 package com.integrador.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Endereco {
     private String uf;
 
     @OneToMany(mappedBy = "cep", targetEntity = Contribuinte.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Contribuinte> contribuintes;
 
     public int getCep() {
