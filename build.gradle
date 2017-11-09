@@ -1,36 +1,35 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-
+description = """integrador3"""
 group = 'com.integrador'
 version = '0.0.1-SNAPSHOT'
 
-description = """integrador3"""
-
-sourceCompatibility = 1.5
-targetCompatibility = 1.5
-tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
+buildscript{
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.6.RELEASE'
+    }
 }
+
+apply plugin: 'java'
+compileJava.options.encoding = 'UTF-8'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 
 repositories {
-        
-     maven { url "https://repo.maven.apache.org/maven2" }
+    mavenCentral()
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas', version:'1.5.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.6.RELEASE'
-    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'1.5.6.RELEASE'
     runtime group: 'org.postgresql', name: 'postgresql', version:'9.4.1212.jre7'
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.6.RELEASE') {
-exclude(module: 'commons-logging')
+        exclude(module: 'commons-logging')
     }
-}
-
-bootRun {
-    addResources = true
-}
-
-bootRepackage {
-    mainClass = 'package com.integrador.Integrador3Application'
 }
