@@ -68,7 +68,7 @@ public class DoacaoController {
     }
 
     @CrossOrigin
-    @GetMapping("/updateStatus/{numeroRecibo }/{status}")
+    @GetMapping("/updateStatus/{numeroRecibo}/{status}")
     public ResponseEntity<Doacao> putMobile(@PathVariable("numeroRecibo") Integer numeroRecibo,
                                           @PathVariable("status") String status) {
        Doacao doacao = service.findById(numeroRecibo);
