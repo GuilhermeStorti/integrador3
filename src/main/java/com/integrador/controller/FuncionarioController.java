@@ -54,6 +54,7 @@ public class FuncionarioController {
         funcionario.setEndereco(this.enderecoService.save(funcionario.getEndereco()));
         funcionario.setUsuario(this.usuarioService.save(funcionario.getUsuario()));
         funcionario.setCargo(this.cargoService.findById(funcionario.getCargo().getId()));
+
         return ResponseEntity.ok().body(service.save(funcionario));
     }
 
@@ -77,8 +78,7 @@ public class FuncionarioController {
     @CrossOrigin
     @RequestMapping(value = "/findAtualMotoboy", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<?> findAtualMotoboy() {
-        FuncionarioRepresentation representation = new FuncionarioRepresentation(this.service.findAtualMotoboy());
-        return ResponseEntity.status(HttpStatus.OK).body(representation);
+    ResponseEntity<Funcionario> findAtualMotoboy() {
+        return ResponseEntity.status(HttpStatus.OK).body(this.service.findAtualMotoboy());
     }
 }

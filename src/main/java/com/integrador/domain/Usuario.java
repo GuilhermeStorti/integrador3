@@ -23,10 +23,8 @@ public class Usuario {
     private String usuario;
 
     @Column (name = "senha")
+    @JsonIgnore
     private String senha;
-
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Funcionario funcionario;
 
     public int getId() {
         return id;
@@ -61,15 +59,6 @@ public class Usuario {
 
     public Usuario setSenha( String senha ) {
         this.senha = senha;
-        return this;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public Usuario setFuncionario( Funcionario funcionario ) {
-        this.funcionario = funcionario;
         return this;
     }
 

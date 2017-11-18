@@ -1,22 +1,18 @@
 package com.integrador.controller;
 
 import com.integrador.domain.Doacao;
+import com.integrador.exception.DoacaoNotFoundException;
 import com.integrador.representation.DoacaoRepresentation;
 import com.integrador.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,5 +65,15 @@ public class DoacaoController {
     public ResponseEntity<Void> delete(@PathVariable("numeroRecibo ") Integer numeroRecibo ) {
         this.service.delete(numeroRecibo );
         return ResponseEntity.ok().build();
+    }
+
+    @CrossOrigin
+    @GetMapping("/updateStatus/{numeroRecibo }/{status}")
+    public ResponseEntity<Doacao> putMobile(@PathVariable("numeroRecibo") Integer numeroRecibo,
+                                          @PathVariable("status") String status) {
+       Doacao doacao = service.findById(numeroRecibo);
+       doacao.setDataBaixa(new Date());
+       doacao.setStatus(status);
+       return ResponseEntity.ok().body(this.service.update(doacao));
     }
 }

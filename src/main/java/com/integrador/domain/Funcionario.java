@@ -60,9 +60,8 @@ public class Funcionario {
     @JsonBackReference( value="contribuintes" )
     private List<Contribuinte> contribuintes;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name="id_usuario"))
-    @JsonBackReference
     private Usuario usuario;
 
 

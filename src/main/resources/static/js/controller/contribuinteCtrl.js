@@ -1,6 +1,8 @@
 angular.module("app").controller("contribuinteCtrl", function ($scope, contribuinteService, dateUtils) {
 
     $scope.address = {};
+    $scope.funcionario = {};
+    $scope.contribuinte = { numeroResidencia: null, complementoResidencia:null};
     var addressRepresentation = {};
     var aux = {};
 
@@ -16,8 +18,8 @@ angular.module("app").controller("contribuinteCtrl", function ($scope, contribui
         parseToRepresentation();
         this.contribuinte.id = 0;
         $scope.contribuinte.cep = addressRepresentation;
-        $scope.contribuinte.numeroResidencia = parseInt($scope.address.numero);
-        $scope.contribuinte.complementoResidencia = $scope.address.complemento;
+        this.contribuinte.numeroResidencia = parseInt(this.funcionario.numeroResidencia);
+        this.contribuinte.complementoResidencia = this.funcionario.complementoResidencia;
         $scope.contribuinte.situacao = "A";
         contribuinteService.saveContribuinte($scope.contribuinte).success(function (data) {
             $scope.limpar();
