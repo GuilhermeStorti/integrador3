@@ -1,7 +1,13 @@
 package com.integrador.controller;
 
+import com.integrador.representation.UsuarioRepresentation;
+import com.integrador.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -13,14 +19,17 @@ import java.util.UUID;
  */
 @CrossOrigin
 @RestController
+@RequestMapping("/login")
 public class LoginController {
 
-    @RequestMapping("/resource")
-    public Map<String,Object> home() {
-        Map<String,Object> model = new HashMap<String,Object>();
-        model.put("id", UUID.randomUUID().toString());
-        model.put("content", "Hello World");
-        return model;
+    @Autowired
+    UsuarioService usuarioService;
+
+    @CrossOrigin
+    @RequestMapping(value = "/validateUser/{user}/{password}", method = RequestMethod.GET)
+    public ResponseEntity<?>  validateUser(@PathVariable("user") String user, @PathVariable("password") String password){
+        UsuarioRepresentation representation = new UsuarioRepresentation(this.usuarioService.validateUser(user, password));
+        return ResponseEntity.ok(representation);
     }
 
 }

@@ -64,6 +64,11 @@ public class UsuarioService {
         this.repository.delete(id);
     }
 
+    @Transactional(readOnly = false)
+    public Usuario validateUser(String user, String pass){
+        return this.repository.validateUser(user, pass);
+    }
+
     private boolean exist( Integer id ) {
         return this.repository.exists( id );
     }
